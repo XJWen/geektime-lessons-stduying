@@ -4,6 +4,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+/**
+ * Servlet生命周期监听器
+ * **/
 @WebListener
 public class DBConnectionInitializerListener implements ServletContextListener {
 

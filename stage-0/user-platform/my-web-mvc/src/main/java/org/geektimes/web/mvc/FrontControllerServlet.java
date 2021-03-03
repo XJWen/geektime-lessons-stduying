@@ -47,6 +47,7 @@ public class FrontControllerServlet extends HttpServlet {
     /**
      * 读取所有的 RestController 的注解元信息 @Path
      * 利用 ServiceLoader 技术（Java SPI）
+     * 从service包中的实例文件中读出来
      */
     private void initHandleMethods() {
         for (Controller controller : ServiceLoader.load(Controller.class)) {
@@ -124,11 +125,11 @@ public class FrontControllerServlet extends HttpServlet {
                     String httpMethod = request.getMethod();
 
                     if (!handlerMethodInfo.getSupportedHttpMethods().contains(httpMethod)) {
-                        // HTTP 方法不支持
+                        // HTTP 方法不支持请求对应的方法
                         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                         return;
                     }
-
+                    //继承接口PageController
                     if (controller instanceof PageController) {
                         PageController pageController = PageController.class.cast(controller);
                         String viewPath = pageController.execute(request, response);
