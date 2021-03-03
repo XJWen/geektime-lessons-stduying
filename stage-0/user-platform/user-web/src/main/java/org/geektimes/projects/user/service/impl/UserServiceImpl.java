@@ -1,12 +1,17 @@
 package org.geektimes.projects.user.service.impl;
 
 import org.geektimes.projects.user.domain.User;
+import org.geektimes.projects.user.repository.DatabaseUserRepository;
 import org.geektimes.projects.user.service.UserService;
+import org.geektimes.utils.JdkProxyFcatory;
 
 public class UserServiceImpl implements UserService {
+
+    DatabaseUserRepository userRepository = JdkProxyFcatory.createObject(DatabaseUserRepository.class,new DatabaseUserRepository());
+
     @Override
     public boolean register(User user) {
-        return false;
+        return userRepository.save(user);
     }
 
     @Override

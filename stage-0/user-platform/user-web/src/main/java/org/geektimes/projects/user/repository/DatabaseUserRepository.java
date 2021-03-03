@@ -7,6 +7,7 @@ import org.geektimes.projects.user.sql.DBConnectionManager;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.*;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 
 import static org.apache.commons.lang.ClassUtils.wrapperToPrimitive;
 
-public class DatabaseUserRepository implements UserRepository {
+public class DatabaseUserRepository implements UserRepository, InvocationHandler {
 
     private static Logger logger = Logger.getLogger(DatabaseUserRepository.class.getName());
 
@@ -32,6 +33,10 @@ public class DatabaseUserRepository implements UserRepository {
     public static final String QUERY_ALL_USERS_DML_SQL = "SELECT id,name,password,email,phoneNumber FROM users";
 
     private final DBConnectionManager dbConnectionManager;
+
+    public DatabaseUserRepository(){
+        dbConnectionManager = null;
+    }
 
     public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
         this.dbConnectionManager = dbConnectionManager;
@@ -157,5 +162,10 @@ public class DatabaseUserRepository implements UserRepository {
         preparedStatementMethodMappings.put(String.class, "setString"); //
 
 
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        return null;
     }
 }
