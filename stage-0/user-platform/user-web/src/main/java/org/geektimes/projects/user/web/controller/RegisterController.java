@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-
-@Path("/register")
 public class RegisterController implements PageController {
 
     private UserService userService = new UserServiceImpl();
 
     @Override
     @POST
+    @Path("/register")
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
