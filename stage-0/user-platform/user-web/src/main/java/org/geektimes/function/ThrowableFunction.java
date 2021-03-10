@@ -7,7 +7,7 @@ public interface ThrowableFunction<T, R> {
 
     /**
      * Applies this function to the given argument.
-     *
+     * 将此函数应用于给定参数
      * @param t the function argument
      * @return the function result
      * @throws Throwable if met with any error

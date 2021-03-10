@@ -134,11 +134,11 @@ public class FrontControllerServlet extends HttpServlet {
                         PageController pageController = PageController.class.cast(controller);
                         String viewPath = pageController.execute(request, response);
                         // 页面请求 forward
-                        // request -> RequestDispatcher forward
+                        // request -> RequestDispatcher forward (追加前缀路径)
                         // RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPath);
                         // ServletContext -> RequestDispatcher forward
-                        // ServletContext -> RequestDispatcher 必须以 "/" 开头
                         ServletContext servletContext = request.getServletContext();
+                        // ServletContext -> RequestDispatcher 必须以 "/" 开头
                         if (!viewPath.startsWith("/")) {
                             viewPath = "/" + viewPath;
                         }

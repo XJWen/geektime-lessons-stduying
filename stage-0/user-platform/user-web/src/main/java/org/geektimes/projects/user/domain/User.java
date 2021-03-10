@@ -1,13 +1,17 @@
 package org.geektimes.projects.user.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * 用户领域对象
- *
+ * 序列化
+ * 双向对象关系--级联
+ * 单向对象关系--数据外键约束
+ * 多态确保接口的契约性/继承确保属性参数的复用性
  * @since 1.0
  */
-public class User {
+public class User implements Serializable {
 
     private Long id;
 
@@ -73,8 +77,8 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){ return true;}
+        if (o == null || getClass() != o.getClass()){ return false;}
         User user = (User) o;
         return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
     }

@@ -2,15 +2,27 @@ package org.geektimes.projects.user.sql;
 
 import org.geektimes.projects.user.domain.User;
 
+import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.sql.*;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class DBConnectionManager {
+    //依赖注入(依靠容器实现)
+    @Resource(lookup = "java:/comp/env",name = "jdbc/UserPlatformDB")
+    private static DataSource dataSource;
+    //java内部的日志类
+    private final Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
+
 
     private Connection connection;
 
@@ -21,6 +33,23 @@ public class DBConnectionManager {
     public Connection getConnection() {
         return this.connection;
     }
+
+//    public Connection getConnection() {
+//        ComponentContext context = ComponentContext.getInstance();
+//        // 依赖查找
+//        DataSource dataSource = context.getComponent("jdbc/UserPlatformDB");
+//        Connection connection = null;
+//        try {
+//            connection = dataSource.getConnection();
+//        } catch (SQLException e) {
+    //
+//            logger.log(Level.SEVERE, e.getMessage());
+//        }
+//        if (connection != null) {
+//            logger.log(Level.INFO, "获取 JNDI 数据库连接成功！");
+//        }
+//        return connection;
+//    }
 
     public void releaseConnection() {
         if (this.connection != null) {
@@ -59,10 +88,16 @@ public class DBConnectionManager {
 //        DriverManager.setLogWriter(new PrintWriter(System.out));
 //        //获取驱动
 //        Connection connection = driver.connect("jdbc:derby:/db/user-platform;create=true", new Properties());
-
-
+        //依赖查找
+//        Context initCtx = new InitialContext();
+//        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+//        DataSource jndiDataSource = (DataSource) envCtx.lookup("jdbc/UserPlatformDB");
+        //JDBC 方式连接
         String databaseURL = "jdbc:derby:/db/user-platform;create=true";
         Connection connection = DriverManager.getConnection(databaseURL);
+//        //通过JNDI获取数据源
+//        System.out.println("DataSource:"+dataSource);
+//        Connection connection =  dataSource.getConnection();
         //SQL命令
         Statement statement = connection.createStatement();
         // 删除 users 表

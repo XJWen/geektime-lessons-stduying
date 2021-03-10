@@ -24,6 +24,7 @@ public class CharsetEncodingFilter implements Filter {
     public void doFilter(ServletRequest request,
                          ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        //继承HttpServletRequest
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpServletResponse httpResponse = (HttpServletResponse) response;

@@ -4,6 +4,18 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          metadata-complete="true" version="2.5">
+
+    <!--web.xml布局
+      Listener->servlet->filter
+     -->
+    <listener>
+        <listener-class>org.geektimes.projects.user.web.listener.ComponentContextInitializerListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.geektimes.projects.user.web.listener.TestingListener</listener-class>
+    </listener>
+
     <!--静态加载 Tomcat Api局限于Tomcat服务器-->
     <servlet>
         <servlet-name>default</servlet-name>
@@ -84,12 +96,24 @@
         <welcome-file>/index</welcome-file>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
+    <!--本地引用content.xml-->
+    <resource-ref>
+        <description>DB Connection</description>
+        <!--JNDI javax.naming.Name Bean的id-->
+        <res-ref-name>jdbc/UserPlatformDB</res-ref-name>
+        <!--类型-->
+        <res-type>javax.sql.DataSource</res-type>
+        <!--认证方式-->
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
-<!--    <resource-ref>-->
-<!--        <description>DB Connection</description>-->
-<!--        <res-ref-name>jdbc/UserPlatformDB</res-ref-name>-->
-<!--        <res-type>javax.sql.DataSource</res-type>-->
-<!--        <res-auth>Container</res-auth>-->
-<!--    </resource-ref>-->
+    <resource-ref>
+        <description>DBConnectionManager</description>
+        <!--JNDI javax.naming.Name Bean的id-->
+        <resource-env-ref-name>bean/DBConnectionManager</resource-env-ref-name>
+        <!--类型-->
+        <resource-env-ref-type>org.geektimes.projects.user.sql.DBConnectionManager</resource-env-ref-type>
+    </resource-ref>
+
 
 </web-app>
