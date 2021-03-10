@@ -96,24 +96,26 @@
         <welcome-file>/index</welcome-file>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
-    <!--本地引用content.xml-->
+<!--
+    &lt;!&ndash;本地引用content.xml&ndash;&gt;
     <resource-ref>
         <description>DB Connection</description>
-        <!--JNDI javax.naming.Name Bean的id-->
+        &lt;!&ndash;JNDI javax.naming.Name Bean的id&ndash;&gt;
         <res-ref-name>jdbc/UserPlatformDB</res-ref-name>
-        <!--类型-->
+        &lt;!&ndash;类型&ndash;&gt;
         <res-type>javax.sql.DataSource</res-type>
-        <!--认证方式-->
+        &lt;!&ndash;认证方式&ndash;&gt;
         <res-auth>Container</res-auth>
     </resource-ref>
 
     <resource-ref>
         <description>DBConnectionManager</description>
-        <!--JNDI javax.naming.Name Bean的id-->
+        &lt;!&ndash;JNDI javax.naming.Name Bean的id&ndash;&gt;
         <resource-env-ref-name>bean/DBConnectionManager</resource-env-ref-name>
-        <!--类型-->
+        &lt;!&ndash;类型&ndash;&gt;
         <resource-env-ref-type>org.geektimes.projects.user.sql.DBConnectionManager</resource-env-ref-type>
     </resource-ref>
+-->
 
 
 </web-app>

@@ -1,5 +1,9 @@
 package org.geektimes.projects.user.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,16 +15,28 @@ import java.util.Objects;
  * 多态确保接口的契约性/继承确保属性参数的复用性
  * @since 1.0
  */
+@Entity
+@Table(name = "USERS")
 public class User implements Serializable {
 
+
+    //id 表字段的属性定义
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
+    @Max(32)
+    @Min(6)
     private String password;
 
+    @Column
     private String email;
 
+    @Column
     private String phoneNumber;
 
     public User(){
@@ -33,6 +49,7 @@ public class User implements Serializable {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
 
 
     public Long getId() {
@@ -98,4 +115,6 @@ public class User implements Serializable {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
+
 }
