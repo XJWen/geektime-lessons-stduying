@@ -8,11 +8,18 @@ import javax.validation.ConstraintValidatorContext;
 public class UserValidAnnotationValidator implements ConstraintValidator<UserValid, User> {
 
     private int idRange;
-
+    /**
+     * 初始化方法
+     * */
+    @Override
     public void initialize(UserValid annotation) {
         this.idRange = annotation.idRange();
     }
 
+    /**
+     * 校验方法
+     * @param ConstraintValidatorContext 校验器上下文
+     * */
     @Override
     public boolean isValid(User value, ConstraintValidatorContext context) {
 

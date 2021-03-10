@@ -1,9 +1,7 @@
 package org.geektimes.projects.user.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,6 +21,8 @@ public class User implements Serializable {
     //id 表字段的属性定义
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Min(1)
+    @Digits(integer = Integer.SIZE, fraction = 0)
     private Long id;
 
     @Column
@@ -37,6 +37,7 @@ public class User implements Serializable {
     private String email;
 
     @Column
+    @Pattern(regexp = "^1[3|4|5|7|8][0-9]{9}$",message = "输入号码格式不正确")
     private String phoneNumber;
 
     public User(){
