@@ -6,6 +6,7 @@ import org.geektimes.projects.user.service.UserService;
 import org.geektimes.projects.user.sql.LocalTransactional;
 import org.geektimes.utils.JdkProxyFcatory;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.validation.Validator;
@@ -46,6 +47,7 @@ public class UserServiceImpl implements UserService {
     //默认需要事务
     @Override
     @LocalTransactional
+    @PostConstruct
     public boolean register(User user) {
         // before process
 //        EntityTransaction transaction = entityManager.getTransaction();
@@ -54,12 +56,13 @@ public class UserServiceImpl implements UserService {
         // 主调用
         entityManager.persist(user);
 
-        // 调用其他方法方法
-        update(user); // 涉及事务
+//        // 调用其他方法方法
+//        update(user); // 涉及事务
 
 
         // after process
         // transaction.commit();
+        validator.validate(user);
 
         return false;
 
