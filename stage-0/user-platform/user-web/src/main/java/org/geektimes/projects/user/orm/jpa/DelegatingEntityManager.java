@@ -18,6 +18,9 @@ import java.util.Properties;
 
 /**
  * 委派实现（静态 AOP 实现）
+ * 保持容器内单例
+ * 目前实现 DelegatingEntityManager : EntityManager = 1:1
+ * DelegatingEntityManager : EntityManager = 1:N
  */
 public class DelegatingEntityManager implements EntityManager {
 
@@ -27,11 +30,22 @@ public class DelegatingEntityManager implements EntityManager {
 
     private EntityManager entityManager;
 
+    private EntityManagerFactory entityManagerFactory;
+
     @PostConstruct
     public void init() {
-        EntityManagerFactory entityManagerFactory =
+        this.entityManagerFactory =
                 Persistence.createEntityManagerFactory(persistenceUnitName, loadProperties(propertiesLocation));
         this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    /**
+     * 如果存在多态的情况，尽可能保持方法是 protected
+     * 每个线程获取的 EntityManager 实例，原型实例
+     * @return
+     */
+    protected EntityManager getEntityManager(){
+        return entityManagerFactory.createEntityManager();
     }
 
     private Map loadProperties(String propertiesLocation) {

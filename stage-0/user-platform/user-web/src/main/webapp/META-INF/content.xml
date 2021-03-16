@@ -43,4 +43,8 @@
     <Resource name="bean/UserService" auth="Container"
               type="org.geektimes.projects.user.service.impl.UserServiceImpl"
               factory="org.apache.naming.factory.BeanFactory" />
+
+    <!-- Tomcat JNDI 配置 -->
+    <Environment name="maxValue" value="12"
+                 type="java.lang.Integer" override="false"/>
 </Context>
