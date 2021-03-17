@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.validator.bean.validation;
+package org.geektimes.bean.validation;
 
 import org.geektimes.projects.user.domain.User;
 
@@ -18,7 +18,7 @@ public class UserValidAnnotationValidator implements ConstraintValidator<UserVal
 
     /**
      * 校验方法
-     * @param ConstraintValidatorContext 校验器上下文
+     * @param context 校验器上下文
      * */
     @Override
     public boolean isValid(User value, ConstraintValidatorContext context) {

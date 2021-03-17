@@ -31,13 +31,13 @@
         目标注入的类型：javax.persistence.EntityManager
     -->
     <Resource name="bean/EntityManager" auth="Container"
-              type="org.geektimes.projects.user.orm.jpa.DelegatingEntityManager"
+              type="org.geektimes.orm.jpa.DelegatingEntityManager"
               persistenceUnitName="emf"
               propertiesLocation="META-INF/jpa-datasource.properties"
               factory="org.apache.naming.factory.BeanFactory" />
 
     <Resource name="bean/Validator" auth="Container"
-              type="org.geektimes.projects.user.validator.bean.validation.DelegatingValidator"
+              type="org.geektimes.bean.validation.DelegatingValidator"
               factory="org.apache.naming.factory.BeanFactory" />
 
     <Resource name="bean/UserService" auth="Container"

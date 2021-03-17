@@ -1,7 +1,10 @@
-package org.geektimes.projects.user.management;
+package org.geektimes.management;
 
 import org.geektimes.projects.user.domain.User;
 
+/**
+ * 继承标准MBean的实现类，必须以XXXMBean的XXX作为类名
+ * */
 public class UserManager implements UserManagerMBean{
 
     private final User user;
@@ -10,6 +13,10 @@ public class UserManager implements UserManagerMBean{
         this.user = user;
     }
 
+    /**
+     * 复杂类型
+     * CompositeData attribute->[{},{},{},{}]
+     * */
     @Override
     public User getUser() {
         return user;

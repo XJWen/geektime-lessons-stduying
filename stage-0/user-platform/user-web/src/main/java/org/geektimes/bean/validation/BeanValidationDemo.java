@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.validator.bean.validation;
+package org.geektimes.bean.validation;
 
 import org.geektimes.projects.user.domain.User;
 

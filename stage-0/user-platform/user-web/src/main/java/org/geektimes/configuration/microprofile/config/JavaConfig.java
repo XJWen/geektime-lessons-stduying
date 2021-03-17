@@ -37,6 +37,7 @@ public class JavaConfig implements Config {
     public <T> T getValue(String propertyName, Class<T> propertyType) {
         String propertyValue = getPropertyValue(propertyName);
         //String转成指定类型
+
         return null;
     }
 

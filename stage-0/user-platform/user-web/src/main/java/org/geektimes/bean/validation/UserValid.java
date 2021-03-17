@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.validator.bean.validation;
+package org.geektimes.bean.validation;
 
 import javax.validation.Constraint;
 import java.lang.annotation.ElementType;

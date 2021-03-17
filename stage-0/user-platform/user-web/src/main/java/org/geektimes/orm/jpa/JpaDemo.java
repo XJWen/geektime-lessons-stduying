@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.orm.jpa;
+package org.geektimes.orm.jpa;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import org.geektimes.projects.user.domain.User;

@@ -47,6 +47,9 @@
           <element id="library" level="project" name="Maven: commons-configuration:commons-configuration:1.10" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
           <element id="library" level="project" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:2.0" />
+          <element id="library" level="project" name="Maven: org.jolokia:jolokia-core:1.6.2" />
+          <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.18" />
         </element>
       </element>
       <element id="directory" name="META-INF">

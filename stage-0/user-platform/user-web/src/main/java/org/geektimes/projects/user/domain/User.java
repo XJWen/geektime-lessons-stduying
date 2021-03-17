@@ -1,5 +1,7 @@
 package org.geektimes.projects.user.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -20,7 +22,7 @@ public class User implements Serializable {
 
     //id 表字段的属性定义
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Min(1)
     @Digits(integer = Integer.SIZE, fraction = 0)
     private Long id;
@@ -29,8 +31,7 @@ public class User implements Serializable {
     private String name;
 
     @Column
-    @Max(32)
-    @Min(6)
+    @Length(min = 6,max = 32)
     private String password;
 
     @Column

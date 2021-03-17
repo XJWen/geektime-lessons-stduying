@@ -1,11 +1,12 @@
-package org.geektimes.projects.user.management;
+package org.geektimes.management;
 
 import javax.management.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 动态结构，无固定接口类型（运行时确定）
+ * 动态MBeans，无固定接口类型（运行时确定）
+ * MXBean 需要接口描述
  */
 public class UserMXBean implements DynamicMBean {
 

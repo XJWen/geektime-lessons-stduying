@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.management;
+package org.geektimes.management;
 
 import org.geektimes.projects.user.domain.User;
 
@@ -11,7 +11,7 @@ public class UserMBeanDemo {
         // 获取平台 MBean Server
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
         // 为 UserMXBean 定义 ObjectName
-        ObjectName objectName = new ObjectName("org.geektimes.projects.user.management:type=User");
+        ObjectName objectName = new ObjectName("org.geektimes.management:type=User");
         // 创建 UserMBean 实例
         User user = new User();
         mBeanServer.registerMBean(createUserMBean(user),objectName);

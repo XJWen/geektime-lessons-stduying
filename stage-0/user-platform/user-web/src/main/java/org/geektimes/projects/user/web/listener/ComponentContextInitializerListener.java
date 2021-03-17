@@ -1,8 +1,17 @@
 package org.geektimes.projects.user.web.listener;
 
 
+import lombok.SneakyThrows;
 import org.geektimes.context.ComponentContext;
+import org.geektimes.logging.UserWebLoggingConfiguration;
+import org.geektimes.management.ConfigSourceContext;
+import org.geektimes.management.ConfigSourceContextMBean;
+import org.geektimes.management.UserManager;
+import org.geektimes.management.UserManagerMBean;
+import org.geektimes.projects.user.domain.User;
 
+import javax.management.NotCompliantMBeanException;
+import javax.management.StandardMBean;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,6 +22,7 @@ import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.prefs.BackingStoreException;
 
 
 /**
@@ -31,6 +41,15 @@ public class ComponentContextInitializerListener implements ServletContextListen
         ComponentContext context = new ComponentContext();
         context.init(servletContext);
         servletContext.setAttribute(ComponentContext.CONTEXT_NAME,context);
+
+        try {
+            StandardMBean userStandardMBean =  new StandardMBean(new UserManager(new User()), UserManagerMBean.class);
+            StandardMBean standardMBean = new StandardMBean(new ConfigSourceContext(), ConfigSourceContextMBean.class);
+        } catch (NotCompliantMBeanException | BackingStoreException e) {
+            UserWebLoggingConfiguration.logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     @Override

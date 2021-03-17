@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.logging;
+package org.geektimes.logging;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +10,11 @@ import java.util.logging.Logger;
 
 public class UserWebLoggingConfiguration {
 
+    public static Logger logger = Logger.getLogger("org.geektimes");
+
     public UserWebLoggingConfiguration() throws UnsupportedEncodingException {
         System.out.println("UserWebLoggingConfiguration");
         // 通过代码的方式调整日志级别
-        Logger logger = Logger.getLogger("org.geektimes");
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setEncoding("UTF-8");
         consoleHandler.setLevel(Level.INFO);
@@ -23,7 +24,6 @@ public class UserWebLoggingConfiguration {
 
     public static void main(String[] args) {
 
-        Logger logger = Logger.getLogger("org.geektimes");
 
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 

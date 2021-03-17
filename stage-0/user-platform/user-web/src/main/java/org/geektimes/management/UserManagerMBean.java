@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.management;
+package org.geektimes.management;
 
 import org.geektimes.projects.user.domain.User;
 
