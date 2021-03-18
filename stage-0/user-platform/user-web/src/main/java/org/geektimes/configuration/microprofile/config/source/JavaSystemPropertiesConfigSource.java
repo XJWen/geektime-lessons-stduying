@@ -3,8 +3,12 @@ package org.geektimes.configuration.microprofile.config.source;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.Converter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -18,6 +22,7 @@ public class JavaSystemPropertiesConfigSource  implements ConfigSource{
      * */
     private final Map<String,String> properties;
 
+
     public JavaSystemPropertiesConfigSource() throws BackingStoreException {
        /* this.properties = new HashMap<>();
         for (String propertyName : System.getProperties().stringPropertyNames()){
@@ -28,8 +33,6 @@ public class JavaSystemPropertiesConfigSource  implements ConfigSource{
         preferences.put("my-key","hello windows");
         preferences.flush();
         preferences.get("my-key",null);
-
-        Converter converter ;
 
         Map systemProperties = System.getProperties();
 

@@ -5,6 +5,7 @@ import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.geektimes.configuration.microprofile.config.JavaConfig;
 import org.geektimes.configuration.microprofile.config.source.JavaSystemPropertiesConfigSource;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 
@@ -14,7 +15,7 @@ public class ConfigSourceContext implements ConfigSourceContextMBean{
 
     private final Config configContext;
 
-    public ConfigSourceContext() throws BackingStoreException {
+    public ConfigSourceContext() throws BackingStoreException, IOException {
         JavaSystemPropertiesConfigSource systemPropertiesConfigSource = new JavaSystemPropertiesConfigSource();
         JavaConfig javaConfig = new JavaConfig();
         this.configSource = systemPropertiesConfigSource;

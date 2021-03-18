@@ -20,6 +20,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.prefs.BackingStoreException;
@@ -45,7 +46,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
         try {
             StandardMBean userStandardMBean =  new StandardMBean(new UserManager(new User()), UserManagerMBean.class);
             StandardMBean standardMBean = new StandardMBean(new ConfigSourceContext(), ConfigSourceContextMBean.class);
-        } catch (NotCompliantMBeanException | BackingStoreException e) {
+        } catch (NotCompliantMBeanException | BackingStoreException | IOException e) {
             UserWebLoggingConfiguration.logger.severe(e.getMessage());
             e.printStackTrace();
         }

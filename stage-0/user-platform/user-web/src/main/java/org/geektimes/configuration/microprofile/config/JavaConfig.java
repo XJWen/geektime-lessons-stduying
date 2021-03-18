@@ -1,10 +1,17 @@
 package org.geektimes.configuration.microprofile.config;
 
+import lombok.SneakyThrows;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigValue;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.Converter;
+import org.geektimes.logging.UserWebLoggingConfiguration;
+import org.geektimes.projects.user.domain.User;
+import org.geektimes.utils.ConverterPlus;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 import java.util.*;
 
 public class JavaConfig implements Config {
@@ -14,9 +21,16 @@ public class JavaConfig implements Config {
      */
     private List<ConfigSource> configSourceList = new LinkedList<>();
 
-    public JavaConfig(){
+    public  String applicationName = "";
+
+
+    public JavaConfig() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         ServiceLoader<ConfigSource> serviceLoader = ServiceLoader.load(ConfigSource.class,classLoader);
+        InputStream inputStream = classLoader.getResourceAsStream("application.properties");
+        Properties applicationPro = new Properties();
+        applicationPro.load(inputStream);
+        applicationName = applicationPro.getProperty("applicationname");
         //lambda
         serviceLoader.forEach(configSourceList::add);
         //通过比较进行排序
@@ -36,9 +50,15 @@ public class JavaConfig implements Config {
     @Override
     public <T> T getValue(String propertyName, Class<T> propertyType) {
         String propertyValue = getPropertyValue(propertyName);
+        T result= null;
         //String转成指定类型
+        try {
+            result =ConverterPlus.castToT(propertyValue,propertyType,null);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        return null;
+        return result;
     }
 
     @Override
