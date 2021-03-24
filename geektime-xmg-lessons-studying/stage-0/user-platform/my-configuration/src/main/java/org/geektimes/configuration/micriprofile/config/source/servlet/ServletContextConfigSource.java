@@ -1,6 +1,7 @@
 package org.geektimes.configuration.micriprofile.config.source.servlet;
 
-import org.geektimes.configuration.microprofile.config.source.MapBasedConfigSource;
+import org.geektimes.configuration.micriprofile.config.source.MapBasedConfigSource;
+
 
 import javax.servlet.ServletContext;
 import java.util.Enumeration;

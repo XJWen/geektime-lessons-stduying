@@ -4,8 +4,9 @@ import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigBuilder;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.Converter;
-import org.geektimes.configuration.microprofile.config.converter.Converters;
-import org.geektimes.configuration.microprofile.config.source.ConfigSources;
+import org.geektimes.configuration.micriprofile.config.converter.Converters;
+import org.geektimes.configuration.micriprofile.config.source.ConfigSources;
+
 
 /**
  * @see {@link ConfigSources}
