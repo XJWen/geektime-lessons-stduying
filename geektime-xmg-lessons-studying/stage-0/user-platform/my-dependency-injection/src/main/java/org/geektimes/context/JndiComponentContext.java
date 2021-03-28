@@ -1,7 +1,7 @@
-package geektimes.context;
+package org.geektimes.context;
 
-import geektimes.function.ThrowableAction;
-import geektimes.function.ThrowableFunction;
+import org.geektimes.function.ThrowableAction;
+import org.geektimes.function.ThrowableFunction;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -213,6 +213,7 @@ public class JndiComponentContext implements ComponentContext {
     }
 
 
+    @Override
     public <C> C getComponent(String name) {
         return (C) componentsCache.get(name);
     }
@@ -222,6 +223,7 @@ public class JndiComponentContext implements ComponentContext {
      *
      * @return
      */
+    @Override
     public List<String> getComponentNames() {
         return new ArrayList<>(componentsCache.keySet());
     }

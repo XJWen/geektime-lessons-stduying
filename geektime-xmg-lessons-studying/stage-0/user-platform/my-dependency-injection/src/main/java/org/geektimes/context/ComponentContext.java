@@ -1,4 +1,4 @@
-package geektimes.context;
+package org.geektimes.context;
 
 import java.util.List;
 
