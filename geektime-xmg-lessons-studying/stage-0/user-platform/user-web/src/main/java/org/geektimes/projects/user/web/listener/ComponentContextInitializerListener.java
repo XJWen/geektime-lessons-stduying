@@ -1,8 +1,10 @@
 package org.geektimes.projects.user.web.listener;
 
 
-import lombok.SneakyThrows;
-import org.geektimes.context.ComponentContext;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.spi.ConfigSource;
+import org.geektimes.context.ClassicComponentContext;
+import org.geektimes.context.impl.ComponentContext;
 import org.geektimes.logging.UserWebLoggingConfiguration;
 import org.geektimes.management.ConfigSourceContext;
 import org.geektimes.management.ConfigSourceContextMBean;
@@ -12,17 +14,11 @@ import org.geektimes.projects.user.domain.User;
 
 import javax.management.NotCompliantMBeanException;
 import javax.management.StandardMBean;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.prefs.BackingStoreException;
 
 
@@ -45,7 +41,9 @@ public class ComponentContextInitializerListener implements ServletContextListen
 
         try {
             StandardMBean userStandardMBean =  new StandardMBean(new UserManager(new User()), UserManagerMBean.class);
-            StandardMBean standardMBean = new StandardMBean(new ConfigSourceContext(), ConfigSourceContextMBean.class);
+            ConfigSource configSource = null;
+            Config configContext = null;
+            StandardMBean standardMBean = new StandardMBean(new ConfigSourceContext(configSource, configContext), ConfigSourceContextMBean.class);
         } catch (NotCompliantMBeanException | BackingStoreException | IOException e) {
             UserWebLoggingConfiguration.logger.severe(e.getMessage());
             e.printStackTrace();
@@ -56,7 +54,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
 //        ComponentContext context = (ComponentContext) servletContext.getAttribute(ComponentContext.CONTEXT_NAME);
-        ComponentContext context = ComponentContext.getInstance();
+        org.geektimes.context.ComponentContext context = ClassicComponentContext.getInstance();
         context.destroy();
     }
 

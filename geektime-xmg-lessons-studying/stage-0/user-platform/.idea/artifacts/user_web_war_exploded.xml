@@ -54,6 +54,10 @@
           <element id="library" level="project" name="Maven: org.jolokia:jolokia-core:1.6.2" />
           <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.18" />
+          <element id="library" level="project" name="Maven: org.apache.activemq:activemq-all:5.9.1" />
+          <element id="archive" name="my-dependency-injection-v1-SNAPSHOT.jar">
+            <element id="module-output" name="my-dependency-injection" />
+          </element>
         </element>
       </element>
       <element id="directory" name="META-INF">

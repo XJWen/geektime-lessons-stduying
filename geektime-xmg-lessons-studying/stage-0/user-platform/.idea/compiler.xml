@@ -7,6 +7,8 @@
     <bytecodeTargetLevel>
       <module name="my-configuration" target="8" />
       <module name="my-dependency-injection" target="8" />
+      <module name="my-reactive-messaging" target="8" />
+      <module name="my-rest-client" target="8" />
       <module name="my-web-mvc" target="8" />
       <module name="user-platform" target="8" />
       <module name="user-platform (1)" target="8" />
@@ -18,6 +20,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="my-configuration" options="-proc:none -parameters" />
       <module name="my-dependency-injection" options="-proc:none -parameters" />
+      <module name="my-reactive-messaging" options="-proc:none -parameters" />
+      <module name="my-rest-client" options="-proc:none -parameters" />
       <module name="my-web-mvc" options="-proc:none -parameters" />
       <module name="user-web" options="-proc:none -parameters" />
     </option>

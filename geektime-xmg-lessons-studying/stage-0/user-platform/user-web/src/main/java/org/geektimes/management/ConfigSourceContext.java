@@ -2,8 +2,6 @@ package org.geektimes.management;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigSource;
-import org.geektimes.configuration.microprofile.config.JavaConfig;
-import org.geektimes.configuration.microprofile.config.source.JavaSystemPropertiesConfigSource;
 
 import java.io.IOException;
 import java.util.Map;
@@ -15,12 +13,10 @@ public class ConfigSourceContext implements ConfigSourceContextMBean{
 
     private final Config configContext;
 
-    public ConfigSourceContext() throws BackingStoreException, IOException {
-        JavaSystemPropertiesConfigSource systemPropertiesConfigSource = new JavaSystemPropertiesConfigSource();
-        JavaConfig javaConfig = new JavaConfig();
-        this.configSource = systemPropertiesConfigSource;
-        this.configContext = javaConfig;
+    public ConfigSourceContext(ConfigSource configSource, Config configContext) throws BackingStoreException, IOException {
+        this.configSource = configSource;
 
+        this.configContext = configContext;
     }
 
     @Override
