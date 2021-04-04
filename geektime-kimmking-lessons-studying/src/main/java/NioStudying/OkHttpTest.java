@@ -9,17 +9,22 @@ import java.util.concurrent.TimeUnit;
 
 public class OkHttpTest {
 
+    private static OkHttpClient httpClient = null;
+
     public static void main(String[] args) {
         //初始化OkHttpClient
-        OkHttpClient httpClient = new OkHttpClient.Builder()
+        httpClient = new OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.SECONDS)
                 .readTimeout(3,TimeUnit.SECONDS)
                 .build();
         //构建OkHttpClient的Request实体
         String url = "http://localhost:8801";
         Request formPostRequest =
-                new Request.Builder()
-                        .url(url).get().build();
+                new Request
+                        .Builder()
+                        .url(url)
+                        .get()
+                        .build();
         //发起异步请求
         httpClient.newCall(formPostRequest).enqueue(new Callback() {
             @Override
