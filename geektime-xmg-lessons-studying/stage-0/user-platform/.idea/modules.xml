@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/my-cache/my-cache.iml" filepath="$PROJECT_DIR$/my-cache/my-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-configuration/my-configuration.iml" filepath="$PROJECT_DIR$/my-configuration/my-configuration.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-dependency-injection/my-dependency-injection.iml" filepath="$PROJECT_DIR$/my-dependency-injection/my-dependency-injection.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-reactive-messaging/my-reactive-messaging.iml" filepath="$PROJECT_DIR$/my-reactive-messaging/my-reactive-messaging.iml" />
