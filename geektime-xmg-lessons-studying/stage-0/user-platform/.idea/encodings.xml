@@ -7,11 +7,15 @@
     <file url="file://$PROJECT_DIR$/my-configuration/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-dependency-injection/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-dependency-injection/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-interceptor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-interceptor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-reactive-messaging/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-reactive-messaging/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-rest-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-rest-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-web-mvc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-data/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-web/src/main/resources" charset="UTF-8" />
   </component>

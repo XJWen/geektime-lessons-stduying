@@ -30,6 +30,7 @@ import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
+import java.io.IOException;
 import java.net.URI;
 
 import static org.geektimes.cache.configuration.ConfigurationUtils.cacheEntryListenerConfiguration;
@@ -45,7 +46,7 @@ import static org.junit.Assert.assertNull;
 public class CachingTest {
 
     @Test
-    public void testSampleInMemory() {
+    public void testSampleInMemory()  {
         CachingProvider cachingProvider = Caching.getCachingProvider();
         CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("in-memory://localhost/"), null);
         // configure the cache

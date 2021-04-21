@@ -16,6 +16,8 @@
  */
 package org.geektimes.cache.management;
 
+import javax.cache.management.CacheStatisticsMXBean;
+
 /**
  * Cache Statistics
  *
@@ -23,7 +25,7 @@ package org.geektimes.cache.management;
  * @since 1.0.0
  * Date : 2021-04-13
  */
-public interface CacheStatistics {
+public interface CacheStatistics extends CacheStatisticsMXBean {
 
     CacheStatistics reset();
 

@@ -18,6 +18,8 @@
         <module>my-reactive-messaging</module>
         <module>my-rest-client</module>
         <module>my-cache</module>
+        <module>my-interceptor</module>
+        <module>user-data</module>
     </modules>
 
     <properties>
@@ -33,6 +35,8 @@
         <javax.inject.version>1</javax.inject.version>
         <javax.cdi-api.version>2.0</javax.cdi-api.version>
         <javax.cache-api.version>1.1.1</javax.cache-api.version>
+        <javax.interceptor-api.version>1.2</javax.interceptor-api.version>
+
 
         <!-- MicroProfile 版本-->
         <microprofile-config-api.version>2.0</microprofile-config-api.version>
@@ -57,6 +61,9 @@
         <lettuce.version>6.1.0.RELEASE</lettuce.version>
         <jedis.version>3.5.2</jedis.version>
 
+        <!-- Spring 依赖版本 -->
+        <spring-boot.version>2.4.5</spring-boot.version>
+
         <!-- Testing 版本 -->
         <junit.version>4.13</junit.version>
 
@@ -75,6 +82,16 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- Spring Boot Dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- Servlet 3.1 API -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -184,6 +201,13 @@
                 <groupId>javax.cache</groupId>
                 <artifactId>cache-api</artifactId>
                 <version>${javax.cache-api.version}</version>
+            </dependency>
+
+            <!-- Java Interceptor API -->
+            <dependency>
+                <groupId>javax.interceptor</groupId>
+                <artifactId>javax.interceptor-api</artifactId>
+                <version>${javax.interceptor-api.version}</version>
             </dependency>
 
             <!-- MicroProfile -->
@@ -399,5 +423,58 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>tomcat-7</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Tomcat Maven 插件用于构建可执行 war -->
+                        <!-- Tomcat 7.x 官方文档：
+                        http://tomcat.apache.org/tomcat-7.0-doc/index.html
+                        -->
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat7-maven-plugin</artifactId>
+                            <version>2.1</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+
+            </build>
+        </profile>
+
+        <profile>
+            <id>tomcat-8</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Tomcat 8 Maven 插件用于构建可执行 war -->
+                        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat8-maven-plugin -->
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat8-maven-plugin</artifactId>
+                            <version>3.0-r1655215</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+            <pluginRepositories>
+                <pluginRepository>
+                    <!-- tomcat8-maven-plugin 所在仓库 -->
+                    <id>Alfresco</id>
+                    <name>Alfresco Repository</name>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
 
 </project>
