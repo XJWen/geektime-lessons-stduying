@@ -1,6 +1,8 @@
 package org.geektime.spring.orm;
 
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import java.util.List;
 
 public class HibernateDemo {
@@ -15,7 +17,7 @@ public class HibernateDemo {
         List<Object> resultList = query.getResultList();*/
     }
 
-   /* private static SessionFactory getSessionFactory() {
+/*    private static SessionFactory getSessionFactory() {
         return null;
     }*/
 }
