@@ -10,13 +10,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Order(9999)
 public class AnotherSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests();
+        security.csrf();
     }
 
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
+        webSecurity.ignoring().antMatchers("/lib/**");
 //        webSecurity.securityInterceptor();
     }
 }

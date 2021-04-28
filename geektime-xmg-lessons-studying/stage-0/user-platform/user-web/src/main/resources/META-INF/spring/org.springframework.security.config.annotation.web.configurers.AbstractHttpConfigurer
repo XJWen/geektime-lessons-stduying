@@ -1,0 +1,1 @@
+org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer=org.geektimes.web.spring.security.SecurityConfig,org.geektimes.web.spring.security.AnotherSecurityConfig
