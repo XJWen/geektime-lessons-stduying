@@ -11,8 +11,14 @@ public abstract class AbstractConverter<T> implements Converter<T> {
         if (value == null) {
             throw new NullPointerException("The value must not be null!");
         }
-        return doConvert(value);
+        T converedValue = null;
+        try{
+            converedValue = doConvert(value);
+        }catch (Throwable e){
+            throw new IllegalArgumentException("The value can't be converted.", e);
+        }
+        return converedValue;
     }
 
-    protected abstract T doConvert(String value);
+    protected abstract T doConvert(String value) throws Throwable;
 }

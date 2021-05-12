@@ -9,7 +9,7 @@ import java.util.*;
 
 import static java.util.ServiceLoader.load;
 
-public class Converters implements Iterable<Converter> {
+public class MyConverters implements Iterable<Converter> {
 
     public static final int DEFAULT_PRIORITY = 100;
 
@@ -19,11 +19,11 @@ public class Converters implements Iterable<Converter> {
 
     private boolean addedDiscoveredConverters = false;
 
-    public Converters() {
+    public MyConverters() {
         this(Thread.currentThread().getContextClassLoader());
     }
 
-    public Converters(ClassLoader classLoader) {
+    public MyConverters(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }
 

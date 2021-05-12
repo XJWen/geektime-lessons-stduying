@@ -21,7 +21,11 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.util.List;
 import java.util.Objects;
+
+import static org.geektimes.commons.reflect.util.TypeUtils.resolveTypeArguments;
+
 
 /**
  * The type pair of key and value.
@@ -64,27 +68,11 @@ class KeyValueTypePair {
     public static KeyValueTypePair resolve(Class<?> targetClass) {
         assertCache(targetClass);
 
-        KeyValueTypePair pair = null;
-        while (targetClass != null) {
-            pair = resolveFromInterfaces(targetClass);
-            if (pair != null) {
-                break;
-            }
-
-            Type superType = targetClass.getGenericSuperclass();
-            if (superType instanceof ParameterizedType) {
-                pair = resolveFromType(superType);
-            }
-
-            if (pair != null) {
-                break;
-            }
-            // recursively
-            targetClass = targetClass.getSuperclass();
-
+        List<Class<?>> typeArguments = resolveTypeArguments(targetClass);
+        if (typeArguments.size() == 2) {
+            return new KeyValueTypePair(typeArguments.get(0), typeArguments.get(1));
         }
-
-        return pair;
+        return null;
     }
 
     private static KeyValueTypePair resolveFromInterfaces(Class<?> type) {

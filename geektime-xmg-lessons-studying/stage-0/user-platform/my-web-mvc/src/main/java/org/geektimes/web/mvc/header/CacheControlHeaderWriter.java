@@ -11,5 +11,4 @@ public class CacheControlHeaderWriter implements HeaderWriter {
         headers.put("cache-control", Arrays.asList(headerValues));
     }
 
-
 }

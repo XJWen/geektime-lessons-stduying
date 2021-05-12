@@ -30,13 +30,22 @@ public abstract class MapBasedConfigSource implements ConfigSource {
      * @return 不可变 Map 类型的配置数据
      */
     public final Map<String, String> getProperties() {
-        Map<String,String> configData = new HashMap<>();
-        try {
-            prepareConfigData(configData);
-        } catch (Throwable cause) {
-            throw new IllegalStateException("准备配置数据发生错误",cause);
+
+        return Collections.unmodifiableMap(getConfigDate());
+    }
+
+    /**
+     * 方法抽离
+     * */
+    protected Map<String,String> getConfigDate(){
+        try{
+            if (source.isEmpty()){
+                prepareConfigData(source);
+            }
+        }catch (Throwable cause){
+            throw new IllegalStateException("准备配置数据发生错误", cause);
         }
-        return Collections.unmodifiableMap(configData);
+        return source;
     }
 
     /**
@@ -63,7 +72,7 @@ public abstract class MapBasedConfigSource implements ConfigSource {
 
     @Override
     public String getValue(String propertyName) {
-        return source.get(propertyName);
+        return getConfigDate().get(propertyName);
     }
 
 }

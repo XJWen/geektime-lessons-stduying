@@ -5,7 +5,7 @@ import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigValue;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.Converter;
-import org.geektimes.configuration.micriprofile.config.converter.Converters;
+import org.geektimes.configuration.micriprofile.config.converter.MyConverters;
 import org.geektimes.configuration.micriprofile.config.source.ConfigSources;
 
 
@@ -20,11 +20,11 @@ class DefaultConfig implements Config {
 
     private final ConfigSources configSources;
 
-    private final Converters converters;
+    private final MyConverters<O> myConverters;
 
-    DefaultConfig(ConfigSources configSources, Converters converters) {
+    DefaultConfig(ConfigSources configSources, MyConverters<O> myConverters) {
         this.configSources = configSources;
-        this.converters = converters;
+        this.myConverters = myConverters;
     }
 
     @Override
@@ -76,7 +76,7 @@ class DefaultConfig implements Config {
     }
 
     protected <T> Converter<T> doGetConverter(Class<T> forType) {
-        List<Converter> converters = this.converters.getConverters(forType);
+        List<Converter> converters = this.myConverters.getConverters(forType);
         return converters.isEmpty() ? null : converters.get(0);
     }
 
