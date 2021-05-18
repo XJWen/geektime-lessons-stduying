@@ -1,5 +1,7 @@
 package org.geektimes.projects.user.cache;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.cache.Cache;
 import redis.clients.jedis.Jedis;
 
@@ -13,6 +15,10 @@ public class RedisCache implements Cache {
     private final String name;
 
     private final Jedis jedis;
+
+    @Setter
+    @Getter
+    private String key;
 
     public RedisCache(String name, Jedis jedis) {
         Objects.requireNonNull(name, "The 'name' argument must not be null.");
@@ -67,6 +73,9 @@ public class RedisCache implements Cache {
         // Redis 是否支持 namespace
         // name:key
         // String 类型的 key :
+        if (key.equalsIgnoreCase(jedis.get(name))){
+            jedis.del(key);
+        }
     }
 
     // 是否可以抽象出一套序列化和反序列化的 API

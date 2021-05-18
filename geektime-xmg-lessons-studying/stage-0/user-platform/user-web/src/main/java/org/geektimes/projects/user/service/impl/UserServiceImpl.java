@@ -1,10 +1,14 @@
 package org.geektimes.projects.user.service.impl;
 
+import org.geektimes.projects.user.cache.RedisCacheManager;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.repository.DatabaseUserRepository;
 import org.geektimes.projects.user.service.UserService;
 import org.geektimes.projects.user.sql.LocalTransactional;
 import org.geektimes.utils.JdkProxyFcatory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -20,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name="bean/Validator")
     private Validator validator;
+
+    @Autowired
+    private RedisCacheManager cacheManager;
 
     /**
      * register 方法和 update 方法存在于同一线程
@@ -48,6 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @LocalTransactional
     @PostConstruct
+    @Cacheable(value = "user")
     public boolean register(User user) {
         // before process
 //        EntityTransaction transaction = entityManager.getTransaction();
@@ -77,6 +85,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @LocalTransactional
     public boolean update(User user) {
+        Cache cache = cacheManager.getCache("user");
+        cache.put("user",user);
         return false;
     }
 
