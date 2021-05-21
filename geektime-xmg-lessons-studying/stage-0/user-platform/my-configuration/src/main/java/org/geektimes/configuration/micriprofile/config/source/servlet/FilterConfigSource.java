@@ -13,7 +13,7 @@ public class FilterConfigSource extends MapBasedConfigSource {
     private final FilterConfig filterConfig;
 
     protected FilterConfigSource(String name, int ordinal, FilterConfig filterConfig) {
-        super(format("Filter[name:%s] Init Parameters", filterConfig.getFilterName()), 550;
+        super(format("Filter[name:%s] Init Parameters", filterConfig.getFilterName()), 550);
         this.filterConfig = filterConfig;
     }
 
