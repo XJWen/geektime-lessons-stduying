@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.eclipse.microprofile.config:microprofile-config-api:2.0">
+  <library name="Maven: org.springframework:spring-aop:5.3.6">
     <CLASSES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/config/microprofile-config-api/2.0/microprofile-config-api-2.0.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-aop/5.3.6/spring-aop-5.3.6.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/config/microprofile-config-api/2.0/microprofile-config-api-2.0-javadoc.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-aop/5.3.6/spring-aop-5.3.6-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/config/microprofile-config-api/2.0/microprofile-config-api-2.0-sources.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-aop/5.3.6/spring-aop-5.3.6-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

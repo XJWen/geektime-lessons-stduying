@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.apache.tomcat:tomcat-util:7.0.37">
     <CLASSES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37-javadoc.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37-sources.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/apache/tomcat/tomcat-util/7.0.37/tomcat-util-7.0.37-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

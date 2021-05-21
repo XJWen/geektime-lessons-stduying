@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:1.0">
+  <library name="Maven: org.springframework:spring-jcl:5.3.6">
     <CLASSES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/reactive-streams-operators/microprofile-reactive-streams-operators-api/1.0/microprofile-reactive-streams-operators-api-1.0.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-jcl/5.3.6/spring-jcl-5.3.6.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/reactive-streams-operators/microprofile-reactive-streams-operators-api/1.0/microprofile-reactive-streams-operators-api-1.0-javadoc.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-jcl/5.3.6/spring-jcl-5.3.6-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://H:/CompanyMavenRepository/Springstudyrepository/org/eclipse/microprofile/reactive-streams-operators/microprofile-reactive-streams-operators-api/1.0/microprofile-reactive-streams-operators-api-1.0-sources.jar!/" />
+      <root url="jar://H:/CompanyMavenRepository/Springpository/org/springframework/spring-jcl/5.3.6/spring-jcl-5.3.6-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
