@@ -1,6 +1,8 @@
 package org.geektimes.projects.user.domain;
 
+import org.geektimes.projects.user.mybatis.annotation.EnableMyBatis;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -17,6 +19,12 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "USERS")
+@EnableMyBatis(dataSource = "dataSource",
+        configLocation = "classpath*:META-INF/mybatis/mybatis-config.xml",
+        mapperLocation = "classpath*:sample/config/mappers/**/*.xml",
+        environment = "development"
+)
+@ConfigurationProperties(prefix = "org.geektimes.projects.user")
 public class User implements Serializable {
 
 
