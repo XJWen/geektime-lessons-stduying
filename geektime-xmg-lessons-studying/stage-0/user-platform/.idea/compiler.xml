@@ -3,14 +3,9 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="user-data" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="eureka-server" target="8" />
       <module name="my-cache" target="8" />
       <module name="my-commons" target="8" />
       <module name="my-configuration" target="8" />
@@ -20,6 +15,8 @@
       <module name="my-rest-client" target="8" />
       <module name="my-session" target="8" />
       <module name="my-web-mvc" target="8" />
+      <module name="spring-cloud-config-client" target="8" />
+      <module name="spring-cloud-config-server" target="8" />
       <module name="user-data" target="8" />
       <module name="user-platform" target="8" />
       <module name="user-platform (1)" target="8" />
@@ -29,6 +26,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eureka-server" options="-proc:none -parameters" />
       <module name="my-cache" options="-proc:none -parameters" />
       <module name="my-commons" options="-proc:none -parameters" />
       <module name="my-configuration" options="-proc:none -parameters" />
@@ -38,6 +36,8 @@
       <module name="my-rest-client" options="-proc:none -parameters" />
       <module name="my-session" options="-proc:none -parameters" />
       <module name="my-web-mvc" options="-proc:none -parameters" />
+      <module name="spring-cloud-config-client" options="-proc:none -parameters" />
+      <module name="spring-cloud-config-server" options="-proc:none -parameters" />
       <module name="user-data" options="-proc:none -parameters" />
       <module name="user-web" options="-proc:none -parameters" />
     </option>

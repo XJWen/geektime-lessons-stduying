@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-cache/my-cache.iml" filepath="$PROJECT_DIR$/my-cache/my-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-commons/my-commons.iml" filepath="$PROJECT_DIR$/my-commons/my-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-configuration/my-configuration.iml" filepath="$PROJECT_DIR$/my-configuration/my-configuration.iml" />
@@ -11,6 +12,8 @@
       <module fileurl="file://$PROJECT_DIR$/my-rest-client/my-rest-client.iml" filepath="$PROJECT_DIR$/my-rest-client/my-rest-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-session/my-session.iml" filepath="$PROJECT_DIR$/my-session/my-session.iml" />
       <module fileurl="file://$PROJECT_DIR$/my-web-mvc/my-web-mvc.iml" filepath="$PROJECT_DIR$/my-web-mvc/my-web-mvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-config-client/spring-cloud-config-client.iml" filepath="$PROJECT_DIR$/spring-cloud-config-client/spring-cloud-config-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" filepath="$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-data/user-data.iml" filepath="$PROJECT_DIR$/user-data/user-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-platform.iml" filepath="$PROJECT_DIR$/user-platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-platform (1).iml" filepath="$PROJECT_DIR$/user-platform (1).iml" />
