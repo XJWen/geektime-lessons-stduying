@@ -40,7 +40,7 @@ public class Converters  implements Iterable<Converter>{
         Class<?> convertedType = resolveConvertedType(converter);
     }
 
-    private Class<?> resolveConvertedType(Converter<?> converter) {
+    public Class<?> resolveConvertedType(Converter<?> converter) {
         assertConverter(converter);
         Class<?> convertedType = null;
         Class<?> convertedClass = converter.getClass();
@@ -83,7 +83,7 @@ public class Converters  implements Iterable<Converter>{
         return convertedType;
     }
 
-    public Class<?> resolveConvertedType(Type type){
+    private Class<?> resolveConvertedType(Type type){
         Class<?> convertedType = null;
         if (type instanceof ParameterizedType){
             ParameterizedType parameterizedType = (ParameterizedType) type;

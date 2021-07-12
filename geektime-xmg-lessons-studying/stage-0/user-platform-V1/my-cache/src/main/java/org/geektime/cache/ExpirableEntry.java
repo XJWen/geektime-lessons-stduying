@@ -82,7 +82,7 @@ public class ExpirableEntry<K,V> implements Cache.Entry<K,V>, Serializable {
 
     public boolean isExpired() { return getExpiredTime()<1;}
 
-    private long getExpiredTime() {
+    public long getExpiredTime() {
         return getTimestamp() - System.currentTimeMillis();
     }
 

@@ -1,58 +1,36 @@
 package org.geektime.cache.redis;
 
 import org.geektime.cache.AbstractCacheManager;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.cache.Cache;
 import javax.cache.configuration.Configuration;
+import javax.cache.spi.CachingProvider;
+import java.net.URI;
+import java.util.Properties;
 
+/**
+ * {@link javax.cache.CacheManager} based on Jedis
+ */
 public class JedisCacheManager extends AbstractCacheManager {
-    @Override
-    public <K, V, C extends Configuration<K, V>> Cache<K, V> createCache(String s, C c) throws IllegalArgumentException {
-        return null;
+
+    private final JedisPool jedisPool;
+
+    public JedisCacheManager(CachingProvider cachingProvider, URI uri, ClassLoader classLoader, Properties properties) {
+        super(cachingProvider, uri, classLoader, properties);
+        this.jedisPool = new JedisPool(uri);
     }
 
     @Override
-    public <K, V> Cache<K, V> getCache(String s, Class<K> aClass, Class<V> aClass1) {
-        return null;
+    protected <K, V, C extends Configuration<K, V>> Cache doCreateCache(String cacheName, C configuration) {
+        Jedis jedis = jedisPool.getResource();
+        return new JedisCache(this, cacheName, configuration, jedis);
     }
 
     @Override
-    public <K, V> Cache<K, V> getCache(String s) {
-        return null;
+    protected void doClose() {
+        jedisPool.close();
     }
 
-    @Override
-    public Iterable<String> getCacheNames() {
-        return null;
-    }
-
-    @Override
-    public void destroyCache(String s) {
-
-    }
-
-    @Override
-    public void enableManagement(String s, boolean b) {
-
-    }
-
-    @Override
-    public void enableStatistics(String s, boolean b) {
-
-    }
-
-    @Override
-    public void close() {
-
-    }
-
-    @Override
-    public boolean isClosed() {
-        return false;
-    }
-
-    @Override
-    public <T> T unwrap(Class<T> aClass) {
-        return null;
-    }
 }

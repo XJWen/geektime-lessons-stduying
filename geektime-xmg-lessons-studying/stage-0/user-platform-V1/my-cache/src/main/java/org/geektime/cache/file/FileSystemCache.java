@@ -1,11 +1,13 @@
 package org.geektime.cache.file;
 
 import org.geektime.cache.AbstractCache;
+import org.geektime.cache.ExpirableEntry;
 
 import javax.cache.CacheException;
 import javax.cache.CacheManager;
 import javax.cache.configuration.Configuration;
 import java.io.File;
+import java.util.Set;
 
 /**
  * File-System no-thread-safe {@link javax.cache.Cache} implementation
@@ -27,5 +29,32 @@ public class FileSystemCache<K,V> extends AbstractCache<K,V> {
     }
 
     private File entryFile(K key) {
+        return new File(cacheDirectory, String.valueOf(key));
     }
+
+    @Override
+    protected ExpirableEntry<K, V> getEntry(K key) throws CacheException, ClassCastException {
+        return null;
+    }
+
+    @Override
+    protected void putEntry(ExpirableEntry<K, V> entry) throws CacheException, ClassCastException {
+
+    }
+
+    @Override
+    protected ExpirableEntry<K, V> removeEntry(K key) throws CacheException, ClassCastException {
+        return null;
+    }
+
+    @Override
+    protected void clearEntries() throws CacheException {
+
+    }
+
+    @Override
+    protected Set<K> keySet() {
+        return null;
+    }
+
 }

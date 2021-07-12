@@ -11,7 +11,7 @@ import static org.geektime.commons.reflect.util.TypeUtils.resolveTypeArguments;
  * The type pair of key and value.
  *
  */
-class KeyValueTypePair {
+public class KeyValueTypePair {
 
     private final Class<?> keyType;
 

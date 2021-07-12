@@ -4,7 +4,7 @@ package org.geektimes.configuration.micriprofile.config.converter;
 import org.eclipse.microprofile.config.spi.Converter;
 
 
-public class PrioritizedConverter<T> implements Converter<T>, Comparable<PrioritizedConverter<T>> {
+ class PrioritizedConverter<T> implements Converter<T>, Comparable<PrioritizedConverter<T>> {
 
     private final Converter<T> converter;
 
