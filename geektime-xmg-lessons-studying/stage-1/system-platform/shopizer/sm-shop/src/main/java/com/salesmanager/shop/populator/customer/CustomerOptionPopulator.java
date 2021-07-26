@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class CustomerOptionPopulator extends
-		AbstractDataPopulator<com.salesmanager.core.model.customer.attribute.CustomerOption, com.salesmanager.shop.admin.model.customer.attribute.CustomerOption> {
+		AbstractDataPopulator<com.salesmanager.core.model.customer.attribute.CustomerOption, CustomerOption> {
 
 	
 	private CustomerOptionSet optionSet;

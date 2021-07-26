@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The Publisher of {@link javax.cache.event.CacheEntryEvent}
+ * The Publisher of {@link CacheEntryEvent}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0

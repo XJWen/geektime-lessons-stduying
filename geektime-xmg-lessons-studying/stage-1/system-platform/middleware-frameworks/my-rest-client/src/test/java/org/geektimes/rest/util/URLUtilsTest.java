@@ -28,7 +28,7 @@ import static org.geektimes.rest.util.URLUtils.toTemplateVariables;
 import static org.junit.Assert.assertEquals;
 
 /**
- * {@link org.geektimes.rest.util.URLUtils}
+ * {@link URLUtils}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since

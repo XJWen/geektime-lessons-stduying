@@ -214,7 +214,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
             	
             	
             	List<ReadableOrderTotal> totals = new ArrayList<ReadableOrderTotal>();
-            	for(com.salesmanager.core.model.order.OrderTotal t : orderSummary.getTotals()) {
+            	for(OrderTotal t : orderSummary.getTotals()) {
             		ReadableOrderTotal total = new ReadableOrderTotal();
             		total.setCode(t.getOrderTotalCode());
             		total.setValue(t.getValue());

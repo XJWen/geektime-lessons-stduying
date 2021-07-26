@@ -25,10 +25,10 @@ public class Order implements Serializable {
 	private  com.salesmanager.core.model.order.Order order;
 	
 	@Embedded
-	private com.salesmanager.core.model.common.Delivery delivery = null;
+	private Delivery delivery = null;
 	
 	@Embedded
-	private com.salesmanager.core.model.common.Billing billing = null;
+	private Billing billing = null;
 	
 	
 	

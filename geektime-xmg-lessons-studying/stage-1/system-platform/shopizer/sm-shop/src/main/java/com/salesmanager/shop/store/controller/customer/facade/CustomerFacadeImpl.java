@@ -811,7 +811,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
       customerOptin.setFirstName(optin.getFirstName());
       customerOptin.setLastName(optin.getLastName());
     } else {
-      customerOptin = new com.salesmanager.core.model.system.optin.CustomerOptin();
+      customerOptin = new CustomerOptin();
       customerOptin.setEmail(optin.getEmail());
       customerOptin.setFirstName(optin.getFirstName());
       customerOptin.setLastName(optin.getLastName());

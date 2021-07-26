@@ -34,7 +34,7 @@ public class OrderProductAttribute implements Serializable {
 	private boolean productAttributeIsFree;
 
 	@Column ( name= "PRODUCT_ATTRIBUTE_WEIGHT" , precision=15 , scale=4 )
-	private java.math.BigDecimal productAttributeWeight;
+	private BigDecimal productAttributeWeight;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -74,12 +74,12 @@ public class OrderProductAttribute implements Serializable {
 		this.productAttributeIsFree = productAttributeIsFree;
 	}
 
-	public java.math.BigDecimal getProductAttributeWeight() {
+	public BigDecimal getProductAttributeWeight() {
 		return productAttributeWeight;
 	}
 
 	public void setProductAttributeWeight(
-			java.math.BigDecimal productAttributeWeight) {
+			BigDecimal productAttributeWeight) {
 		this.productAttributeWeight = productAttributeWeight;
 	}
 

@@ -293,7 +293,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(OrderControler.clas
 			 result.addError(error);
 		}
 		
-		com.salesmanager.core.model.order.Order newOrder = orderService.getById(entityOrder.getOrder().getId() );
+		Order newOrder = orderService.getById(entityOrder.getOrder().getId() );
 		
 		//If there was a status changed by Admin, we notify the customer
 		if(BooleanUtils.toBoolean(coreConfiguration.getProperty("MAIL_SEND_ORDER_UPDATES"))

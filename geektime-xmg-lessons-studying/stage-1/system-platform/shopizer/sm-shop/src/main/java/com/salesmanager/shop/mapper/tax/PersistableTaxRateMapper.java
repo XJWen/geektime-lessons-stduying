@@ -68,7 +68,7 @@ public class PersistableTaxRateMapper implements Mapper<PersistableTaxRate, TaxR
 		
 	}
 	
-	private com.salesmanager.core.model.tax.taxrate.TaxRate taxRate(com.salesmanager.core.model.tax.taxrate.TaxRate destination, PersistableTaxRate source) throws Exception {
+	private TaxRate taxRate(TaxRate destination, PersistableTaxRate source) throws Exception {
 		//List<com.salesmanager.core.model.tax.taxrate.TaxRateDescription> descriptions = new ArrayList<com.salesmanager.core.model.tax.taxrate.TaxRateDescription>();
 		
 	      if(!CollectionUtils.isEmpty(source.getDescriptions())) {

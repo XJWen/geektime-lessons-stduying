@@ -120,7 +120,7 @@ public class ConfigurationController {
 		configWrapper.setMerchantConfigs(configs);
 		model.addAttribute("configuration",configWrapper);
 		
-		return com.salesmanager.shop.admin.controller.ControllerConstants.Tiles.Configuration.accounts;
+		return ControllerConstants.Tiles.Configuration.accounts;
 	}
 	
 	@PreAuthorize("hasRole('AUTH')")
@@ -145,7 +145,7 @@ public class ConfigurationController {
 		}	
 		model.addAttribute("success","success");
 		model.addAttribute("configuration",configWrapper);
-		return com.salesmanager.shop.admin.controller.ControllerConstants.Tiles.Configuration.accounts;
+		return ControllerConstants.Tiles.Configuration.accounts;
 		
 	}
 	

@@ -288,19 +288,19 @@ public class ProductFacadeImpl implements ProductFacade {
 
 			if (criterias.getCategoryIds().size() == 1) {
 
-				com.salesmanager.core.model.catalog.category.Category category = categoryService
+				Category category = categoryService
 						.getById(criterias.getCategoryIds().get(0));
 
 				if (category != null) {
 					String lineage = new StringBuilder().append(category.getLineage()).append(Constants.SLASH)
 							.toString();
 
-					List<com.salesmanager.core.model.catalog.category.Category> categories = categoryService
+					List<Category> categories = categoryService
 							.getListByLineage(store, lineage);
 
 					List<Long> ids = new ArrayList<Long>();
 					if (categories != null && categories.size() > 0) {
-						for (com.salesmanager.core.model.catalog.category.Category c : categories) {
+						for (Category c : categories) {
 							ids.add(c.getId());
 						}
 					}
@@ -420,7 +420,7 @@ public class ProductFacadeImpl implements ProductFacade {
 		populator.setCustomerService(customerService);
 		populator.setProductService(productService);
 
-		com.salesmanager.core.model.catalog.product.review.ProductReview rev = new com.salesmanager.core.model.catalog.product.review.ProductReview();
+		ProductReview rev = new ProductReview();
 		populator.populate(review, rev, store, language);
 
 		if (review.getId() == null) {

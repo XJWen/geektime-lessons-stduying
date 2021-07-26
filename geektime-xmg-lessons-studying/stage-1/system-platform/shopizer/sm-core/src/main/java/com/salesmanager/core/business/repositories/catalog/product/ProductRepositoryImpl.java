@@ -134,7 +134,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
 			return (Product) q.getSingleResult();
 
-		} catch (javax.persistence.NoResultException ers) {
+		} catch (NoResultException ers) {
 			return null;
 		}
 
@@ -187,7 +187,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
 			return (Product) q.getSingleResult();
 
-		} catch (javax.persistence.NoResultException ers) {
+		} catch (NoResultException ers) {
 			return null;
 		}
 
@@ -229,7 +229,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
 			return (Product) q.getSingleResult();
 
-		} catch (javax.persistence.NoResultException ers) {
+		} catch (NoResultException ers) {
 			return null;
 		}
 
@@ -291,7 +291,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 			}
 			// p = (Product)q.getSingleResult();
 			p = products.get(0);
-		} catch (javax.persistence.NoResultException ignore) {
+		} catch (NoResultException ignore) {
 
 		}
 

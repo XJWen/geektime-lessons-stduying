@@ -14,7 +14,7 @@ import com.salesmanager.shop.admin.model.customer.attribute.CustomerOptionValue;
 
 
 public class ReadableCustomerOptionPopulator extends
-		AbstractDataPopulator<com.salesmanager.core.model.customer.attribute.CustomerOption, com.salesmanager.shop.admin.model.customer.attribute.CustomerOption> {
+		AbstractDataPopulator<com.salesmanager.core.model.customer.attribute.CustomerOption, CustomerOption> {
 
 	
 	private CustomerOptionSet optionSet;

@@ -494,7 +494,7 @@ public class ShoppingCategoryController {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}
 			
-			List<com.salesmanager.core.model.catalog.product.Product> products = productService.getProducts(ids, lang);
+			List<Product> products = productService.getProducts(ids, lang);
 			
 			ProductList productList = new ProductList();
 			

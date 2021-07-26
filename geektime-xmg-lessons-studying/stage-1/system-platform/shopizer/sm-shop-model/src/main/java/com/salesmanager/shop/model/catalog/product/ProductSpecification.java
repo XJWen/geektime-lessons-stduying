@@ -37,8 +37,8 @@ public class ProductSpecification implements Serializable {
   public void setModel(String model) {
     this.model = model;
   }
-  private com.salesmanager.shop.model.references.DimensionUnitOfMeasure dimensionUnitOfMeasure;
-  private com.salesmanager.shop.model.references.WeightUnitOfMeasure weightUnitOfMeasure;
+  private DimensionUnitOfMeasure dimensionUnitOfMeasure;
+  private WeightUnitOfMeasure weightUnitOfMeasure;
   
   public BigDecimal getHeight() {
     return height;

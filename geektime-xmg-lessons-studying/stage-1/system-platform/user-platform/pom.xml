@@ -2,23 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
+        <artifactId>system-platform</artifactId>
         <groupId>org.geekbang.projects</groupId>
-        <artifactId>stage-1</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.geekbang.projects</groupId>
     <artifactId>user-platform</artifactId>
     <version>${revision}</version>
+    <modules>
+        <module>servlet-web</module>
+        <module>user-web</module>
+    </modules>
     <name>User Platform</name>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>user-web</module>
-        <module>servlet-web</module>
-    </modules>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
 </project>

@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.geekbang.projects</groupId>
         <artifactId>middleware-frameworks</artifactId>
+        <groupId>org.geekbang.projects</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -20,6 +20,20 @@
 
     <dependencies>
 
+        <!-- MicroProfile Config Implementation -->
+        <dependency>
+            <groupId>org.geekbang.projects</groupId>
+            <artifactId>my-configuration</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Internal commons -->
+        <dependency>
+            <groupId>org.geekbang.projects</groupId>
+            <artifactId>my-commons</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- MicroProfile Rest Client -->
         <dependency>
             <groupId>org.eclipse.microprofile.rest.client</groupId>
@@ -30,13 +44,6 @@
         <dependency>
             <groupId>org.eclipse.microprofile.config</groupId>
             <artifactId>microprofile-config-api</artifactId>
-        </dependency>
-
-        <!-- MicroProfile Config Implementation -->
-        <dependency>
-            <groupId>org.geekbang.projects</groupId>
-            <artifactId>my-configuration</artifactId>
-            <version>${revision}</version>
         </dependency>
 
         <!-- MicroProfile Fault Tolerance -->

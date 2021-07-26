@@ -36,7 +36,7 @@ import com.shopizer.search.services.SearchResponse;
 
 
 @Service("productSearchService")
-public class SearchServiceImpl implements com.salesmanager.core.business.services.search.SearchService {
+public class SearchServiceImpl implements SearchService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchServiceImpl.class);
 	

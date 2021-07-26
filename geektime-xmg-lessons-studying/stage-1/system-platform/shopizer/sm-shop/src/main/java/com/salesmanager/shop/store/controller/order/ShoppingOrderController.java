@@ -201,15 +201,15 @@ public class ShoppingOrderController extends AbstractController {
 	    boolean freeShoppingCart = true;
 	    
 	    //Filter items, delete unavailable
-        Set<com.salesmanager.core.model.shoppingcart.ShoppingCartItem> availables = new HashSet<ShoppingCartItem>();
+        Set<ShoppingCartItem> availables = new HashSet<ShoppingCartItem>();
 		
 	if(cart == null) {
             return "redirect:/shop/cart/shoppingCart.html";
         }		
 		
         //Take out items no more available
-        Set<com.salesmanager.core.model.shoppingcart.ShoppingCartItem> items = cart.getLineItems();
-        for(com.salesmanager.core.model.shoppingcart.ShoppingCartItem item : items) {
+        Set<ShoppingCartItem> items = cart.getLineItems();
+        for(ShoppingCartItem item : items) {
         	
         	Long id = item.getProduct().getId();
         	Product p = productService.getById(id);
@@ -744,7 +744,7 @@ public class ShoppingOrderController extends AbstractController {
 				List<ShoppingCartItem> cartItems = new ArrayList<ShoppingCartItem>(items);
 				order.setShoppingCartItems(cartItems);
 				
-		        for(com.salesmanager.core.model.shoppingcart.ShoppingCartItem item : items) {
+		        for(ShoppingCartItem item : items) {
 		        	
 		        	Long id = item.getProduct().getId();
 		        	Product p = productService.getById(id);
@@ -1021,7 +1021,7 @@ public class ShoppingOrderController extends AbstractController {
 
 			//re-generate cart
 			com.salesmanager.core.model.shoppingcart.ShoppingCart cart = shoppingCartFacade.getShoppingCartModel(shoppingCartCode, store);
-			Set<com.salesmanager.core.model.shoppingcart.ShoppingCartItem> cartItems = cart.getLineItems();	
+			Set<ShoppingCartItem> cartItems = cart.getLineItems();
 			
 			
 			ReadableShopOrderPopulator populator = new ReadableShopOrderPopulator();

@@ -48,7 +48,7 @@ import java.util.Map;
  *
  */
 @Controller
-@JsonAutoDetect(getterVisibility=com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(getterVisibility= JsonAutoDetect.Visibility.NONE)
 public class OrdersController {
 	
 	@Inject

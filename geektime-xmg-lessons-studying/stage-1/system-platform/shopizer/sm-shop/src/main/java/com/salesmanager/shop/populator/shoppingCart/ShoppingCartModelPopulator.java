@@ -188,7 +188,7 @@ public class ShoppingCartModelPopulator
     }
 
    
-    private com.salesmanager.core.model.shoppingcart.ShoppingCartItem createCartItem( com.salesmanager.core.model.shoppingcart.ShoppingCart cart,
+    private com.salesmanager.core.model.shoppingcart.ShoppingCartItem createCartItem( ShoppingCart cart,
                                                                                                ShoppingCartItem shoppingCartItem,
                                                                                                MerchantStore store )
         throws Exception

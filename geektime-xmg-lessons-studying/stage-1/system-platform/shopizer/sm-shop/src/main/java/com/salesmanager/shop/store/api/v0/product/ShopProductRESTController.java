@@ -377,7 +377,7 @@ public class ShopProductRESTController {
 			populator.setCustomerService(customerService);
 			populator.setProductService(productService);
 			
-			com.salesmanager.core.model.catalog.product.review.ProductReview rev = new com.salesmanager.core.model.catalog.product.review.ProductReview();
+			ProductReview rev = new ProductReview();
 			populator.populate(review, rev, merchantStore, merchantStore.getDefaultLanguage());
 		
 			productReviewService.create(rev);

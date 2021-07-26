@@ -140,7 +140,7 @@ public class PersistableOrderPopulator extends
 			if(CollectionUtils.isEmpty(products)) {
 				throw new ConversionException("Requires at least 1 PersistableOrderProduct");
 			}
-			com.salesmanager.shop.populator.order.PersistableOrderProductPopulator orderProductPopulator = new PersistableOrderProductPopulator();
+			PersistableOrderProductPopulator orderProductPopulator = new PersistableOrderProductPopulator();
 			orderProductPopulator.setProductAttributeService(productAttributeService);
 			orderProductPopulator.setProductService(productService);
 			orderProductPopulator.setDigitalProductService(digitalProductService);
