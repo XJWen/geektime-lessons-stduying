@@ -49,4 +49,12 @@ public class Solution {
         dfs(board, x, y - 1);
     }
 
+    private static <T> T[] getAll(T... values) {
+        return values;
+    }
+
+    private static <T> T getAll(T values) {
+        return values;
+    }
+
 }
