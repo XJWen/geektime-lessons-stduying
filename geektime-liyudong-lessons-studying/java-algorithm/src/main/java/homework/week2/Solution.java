@@ -12,6 +12,8 @@ import java.util.Map;
  *
  * 接下来会给出一组访问次数和域名组合的列表cpdomains。要求解析出所有域名的访问次数，输出格式和输入格式相同，不限定先后顺序。
  *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/redundant-connection
  * */
 public class Solution {
 
