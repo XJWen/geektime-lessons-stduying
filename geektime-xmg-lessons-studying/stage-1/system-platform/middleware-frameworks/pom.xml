@@ -30,6 +30,8 @@
         <module>my-rpc</module>
         <module>my-session</module>
         <module>my-web-mvc</module>
+        <module>my-fault-tolerance</module>
+        <module>my-cdi</module>
     </modules>
 
     <properties>

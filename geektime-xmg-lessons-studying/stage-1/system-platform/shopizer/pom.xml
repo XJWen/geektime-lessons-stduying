@@ -178,7 +178,7 @@
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-cachestore-jdbc</artifactId>
-                <version>9.4.18.Final</version>
+                <version>${infinispan.version}</version>
             </dependency>
 
             <dependency>

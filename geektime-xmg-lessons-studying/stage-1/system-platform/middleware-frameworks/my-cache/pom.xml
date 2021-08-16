@@ -28,6 +28,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.geekbang.projects</groupId>
+            <artifactId>my-interceptor</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Spring Framework Integration -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
         </dependency>
