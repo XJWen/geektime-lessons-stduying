@@ -1,5 +1,7 @@
 package homework.week9;
 
+import java.util.Arrays;
+
 public class Skiplist {
 
     /**
@@ -115,6 +117,13 @@ public class Skiplist {
         public String toString() {
             return String.valueOf(value);
         }
+    }
+
+    public static void main(String[] args) {
+        int[]  result = new int[3];
+        int[] temp = new int[result.length];
+        int[] t = {1,9,9,4,1,2,2,9};
+        System.out.println(Arrays.stream(result).sum());
     }
 
 
