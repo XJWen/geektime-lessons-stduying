@@ -48,7 +48,7 @@
 
         <!-- 第三方开源依赖版本-->
         <commons-lang.version>2.6</commons-lang.version>
-        <commons-lang3.version>3.6</commons-lang3.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
         <commons-io.version>2.7</commons-io.version>
         <commons-validator.version>1.7</commons-validator.version>
         <commons-configuration.version>1.10</commons-configuration.version>
@@ -230,7 +230,7 @@
             </dependency>
 
             <dependency>
-                <groupId>commons-lang</groupId>
+                <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>

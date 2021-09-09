@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-/**00
+/**
  * The annotations of MicroProfile Fault Tolerance based on {@link javax.interceptor.Interceptor @Interceptor}
  * implementations, the priority of annotations as below:
  * <ol>

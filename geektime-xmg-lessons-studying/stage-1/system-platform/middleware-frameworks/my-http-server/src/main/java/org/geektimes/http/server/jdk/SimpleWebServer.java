@@ -64,6 +64,7 @@ public class SimpleWebServer implements WebServer {
         this.port = port;
     }
 
+    @Override
     public SimpleWebServer start(boolean sync) throws IOException {
 
         httpServer = HttpServer.create(new InetSocketAddress(port), 0);
@@ -94,6 +95,7 @@ public class SimpleWebServer implements WebServer {
         httpServer.start();
     }
 
+    @Override
     public SimpleWebServer stop() {
         logger.info(format("Simple HTTP Server(port : %d, path : %s) is stopping...%n", port, path));
         if (future != null && !future.isDone()) {
