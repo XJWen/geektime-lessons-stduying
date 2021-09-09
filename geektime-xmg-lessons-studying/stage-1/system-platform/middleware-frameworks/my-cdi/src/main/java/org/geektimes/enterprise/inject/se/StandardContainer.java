@@ -16,22 +16,21 @@
  */
 package org.geektimes.enterprise.inject.se;
 
-import org.geektimes.commons.reflect.util.ClassUtils;
-import org.geektimes.enterprise.inject.standard.StandardBeanManager;
+import org.geektimes.enterprise.inject.standard.beans.BeanArchiveManager;
+import org.geektimes.enterprise.inject.standard.beans.StandardBeanManager;
 
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.util.TypeLiteral;
-import java.io.File;
 import java.lang.annotation.Annotation;
-import java.net.URL;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Logger;
 
-import static org.geektimes.commons.reflect.util.ClassUtils.getClassLoader;
+import static org.geektimes.commons.lang.util.ArrayUtils.iterate;
+
 
 /**
  * Standard {@link SeContainer} implementation
@@ -43,157 +42,69 @@ public class StandardContainer implements SeContainer {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
-    private final Map<String, Object> properties;
-
-    private final Set<Class<?>> beanClasses;
-
-    private final Map<Package, Boolean> packagesToDiscovery;
-
-    private final Map<Class<? extends Extension>, Extension> typedExtensions;
-
-    private final Set<Class<?>> interceptorClasses;
-
-    private final Set<Class<?>> decoratorClasses;
-
-    private final Set<Class<?>> alternativeClasses;
-
-    private final Set<Class<? extends Annotation>> alternativeStereotypeClasses;
-
-    private ClassLoader classLoader;
-
-    private boolean enabledDiscovery;
-
     private boolean running;
 
-    private StandardBeanManager standardBeanManager;
+    private final StandardBeanManager standardBeanManager;
+
+    private final BeanArchiveManager beanArchiveManager;
 
     public StandardContainer() {
-        this.classLoader = ClassUtils.getClassLoader(getClass());
-        this.properties = new HashMap<>();
-        this.enabledDiscovery = true;
-        this.beanClasses = new LinkedHashSet<>();
-        this.packagesToDiscovery = new LinkedHashMap<>();
-        this.typedExtensions = new LinkedHashMap<>();
-        this.interceptorClasses = new LinkedHashSet<>();
-        this.decoratorClasses = new LinkedHashSet<>();
-        this.alternativeClasses = new LinkedHashSet<>();
-        this.alternativeStereotypeClasses = new LinkedHashSet<>();
         this.running = false;
+        // Create BeanManager
+        this.standardBeanManager = new StandardBeanManager();
+        this.beanArchiveManager = standardBeanManager.getBeanArchiveManager();
     }
 
-
-    void addBeanClasses(Class<?>... classes) {
-        // TODO Validate the Bean Classes ?
-        iterateNonNull(classes, this.beanClasses::add);
+    void addBeanClasses(Class<?>... beanClasses) {
+        iterate(beanClasses, beanArchiveManager::addSyntheticBeanClass);
     }
 
     void addPackages(boolean scanRecursively, Package... packages) {
-        iterateNonNull(packages, p -> packagesToDiscovery.put(p, scanRecursively));
+        iterate(packages, packageToScan -> beanArchiveManager.addSyntheticPackage(packageToScan, scanRecursively));
     }
 
     void addExtensions(Extension... extensions) {
-        iterateNonNull(extensions, e -> typedExtensions.put(e.getClass(), e));
+        standardBeanManager.extensions(extensions);
     }
 
     void addInterceptors(Class<?>... interceptorClasses) {
-        iterateNonNull(interceptorClasses, this.interceptorClasses::add);
+        standardBeanManager.interceptorClasses(interceptorClasses);
     }
 
     void addDecorators(Class<?>... decoratorClasses) {
-        iterateNonNull(decoratorClasses, this.decoratorClasses::add);
+        standardBeanManager.decoratorClasses(decoratorClasses);
     }
 
     void addAlternatives(Class<?>... alternativeClasses) {
-        iterateNonNull(alternativeClasses, this.alternativeClasses::add);
+        standardBeanManager.alternativeClasses(alternativeClasses);
     }
 
     void addAlternativeStereotypes(Class<? extends Annotation>... alternativeStereotypeClasses) {
-        iterateNonNull(alternativeStereotypeClasses, this.alternativeStereotypeClasses::add);
+        standardBeanManager.alternativeStereotypeClasses(alternativeStereotypeClasses);
     }
 
     void setProperty(String key, Object value) {
-        this.properties.put(key, value);
+        standardBeanManager.property(key, value);
     }
 
     void setProperties(Map<String, Object> properties) {
-        this.properties.clear();
-        this.properties.putAll(properties);
+        standardBeanManager.properties(properties);
     }
 
     void disableDiscovery() {
-        enabledDiscovery = false;
+        beanArchiveManager.disableDiscovery();
     }
 
     void setClassLoader(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-    }
-
-    public static <T> void iterateNonNull(T[] values, Consumer<T> consumer) {
-        Objects.requireNonNull(values, "The argument must not be null!");
-        for (T value : values) {
-            Objects.requireNonNull(value, "Any element of the argument must not be null!");
-            consumer.accept(value);
-        }
+        standardBeanManager.classLoader(classLoader);
     }
 
     public void initialize() {
-        running = true;
-        // Create BeanManager
-        standardBeanManager = new StandardBeanManager(this);
-
-        discover();
-        // TODO
-    }
-
-    private void discover() {
-        if (!enabledDiscovery) {
-            // TODO log
+        if (isRunning()) {
             return;
         }
-        Set<Class<?>> classes = scanClasses();
-        discoverTypes();
-        discoverBeans();
-    }
-
-    private Set<Class<?>> scanClasses() {
-        Set<Class<?>> classes = new LinkedHashSet<>();
-        ClassLoader classLoader = getClassLoader();
-        for (Map.Entry<Package, Boolean> packageEntry : packagesToDiscovery.entrySet()) {
-            Package packageToDiscovery = packageEntry.getKey();
-            boolean scanRecursively = Boolean.TRUE.equals(packageEntry.getValue());
-            scanClasses(classes, classLoader, packageToDiscovery, scanRecursively);
-        }
-        return classes;
-    }
-
-    private void scanClasses(Set<Class<?>> classes, ClassLoader classLoader,
-                             Package packageToDiscovery, boolean scanRecursively) {
-        String resourcePath = packageToDiscovery.getName().replace('.', '/');
-        URL packageResource = classLoader.getResource(resourcePath);
-        String protocol = packageResource.getProtocol();
-        switch (protocol) {
-            case "file":
-                scanClassesInDirectory(classes, packageResource.getPath(), scanRecursively);
-                break;
-            case "jar":
-                scanClassesInJar(classes, classLoader, packageResource, scanRecursively);
-                break;
-        }
-    }
-
-    private void scanClassesInDirectory(Set<Class<?>> classes, String directoryPath, boolean scanRecursively) {
-        File directory = new File(directoryPath);
-    }
-
-    private void scanClassesInJar(Set<Class<?>> classes, ClassLoader classLoader, URL packageResource,
-                                  boolean scanRecursively) {
-
-    }
-
-    private void discoverTypes() {
-    }
-
-    private void discoverBeans() {
+        standardBeanManager.initialize();
+        running = true;
     }
 
     @Override
@@ -216,81 +127,41 @@ public class StandardContainer implements SeContainer {
 
     @Override
     public Instance<Object> select(Annotation... qualifiers) {
-        return null;
+        return standardBeanManager.select(qualifiers);
     }
 
     @Override
     public <U> Instance<U> select(Class<U> subtype, Annotation... qualifiers) {
-        return null;
+        return standardBeanManager.select(subtype, qualifiers);
     }
 
     @Override
     public <U> Instance<U> select(TypeLiteral<U> subtype, Annotation... qualifiers) {
-        return null;
+        return standardBeanManager.select(subtype, qualifiers);
     }
 
     @Override
     public boolean isUnsatisfied() {
-        return false;
+        return standardBeanManager.isUnsatisfied();
     }
 
     @Override
     public boolean isAmbiguous() {
-        return false;
+        return standardBeanManager.isAmbiguous();
     }
 
     @Override
     public void destroy(Object instance) {
-
+        standardBeanManager.destroy(instance);
     }
 
     @Override
     public Iterator<Object> iterator() {
-        return null;
+        return standardBeanManager.iterator();
     }
 
     @Override
     public Object get() {
-        return null;
-    }
-
-    public ClassLoader getClassLoader() {
-        return classLoader;
-    }
-
-    public Map<String, Object> getProperties() {
-        return properties;
-    }
-
-    public boolean isEnabledDiscovery() {
-        return enabledDiscovery;
-    }
-
-    public Set<Class<?>> getBeanClasses() {
-        return beanClasses;
-    }
-
-    public Map<Package, Boolean> getPackagesToDiscovery() {
-        return packagesToDiscovery;
-    }
-
-    public Map<Class<? extends Extension>, Extension> getTypedExtensions() {
-        return typedExtensions;
-    }
-
-    public Set<Class<?>> getInterceptorClasses() {
-        return interceptorClasses;
-    }
-
-    public Set<Class<?>> getDecoratorClasses() {
-        return decoratorClasses;
-    }
-
-    public Set<Class<?>> getAlternativeClasses() {
-        return alternativeClasses;
-    }
-
-    public Set<Class<? extends Annotation>> getAlternativeStereotypeClasses() {
-        return alternativeStereotypeClasses;
+        return standardBeanManager.get();
     }
 }

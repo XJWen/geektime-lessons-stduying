@@ -28,6 +28,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Set;
+import java.util.StringJoiner;
 
 import static java.util.Objects.requireNonNull;
 
@@ -87,5 +88,18 @@ public abstract class AbstractInjectionPoint<A extends Annotated, AM extends Ann
     @Override
     public final boolean isTransient() {
         return Modifier.isTransient(getMember().getModifiers());
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+                .add("type=" + getType())
+                .add("bean=" + getBean())
+                .add("member=" + getMember())
+                .add("qualifiers=" + getQualifiers())
+                .add("annotated=" + getAnnotated())
+                .add("isDelegate=" + isDelegate())
+                .add("isTransient=" + isTransient())
+                .toString();
     }
 }

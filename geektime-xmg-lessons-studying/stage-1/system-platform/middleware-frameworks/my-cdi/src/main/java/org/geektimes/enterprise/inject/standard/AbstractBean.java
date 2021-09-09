@@ -16,22 +16,10 @@
  */
 package org.geektimes.enterprise.inject.standard;
 
-import org.geektimes.enterprise.inject.util.Qualifiers;
-
-import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.spi.Bean;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static org.geektimes.commons.util.AnnotationUtils.existsAnnotated;
-import static org.geektimes.enterprise.inject.util.Beans.getBeanTypes;
-import static org.geektimes.enterprise.inject.util.Scopes.getScopeType;
-import static org.geektimes.enterprise.inject.util.Stereotypes.getStereotypeTypes;
 
 /**
  * The Standard abstract implementation  {@link Bean} based on Java Reflection.
@@ -46,43 +34,10 @@ import static org.geektimes.enterprise.inject.util.Stereotypes.getStereotypeType
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public abstract class AbstractBean<A extends AnnotatedElement, T> implements Bean<T> {
+public abstract class AbstractBean<A extends AnnotatedElement, T> extends AbstractBeanAttributes<A, T> implements Bean<T> {
 
-    private final A annotatedElement;
-
-    private final Class<?> type;
-
-    private final Set<Type> beanTypes;
-
-    private final Set<Annotation> qualifiers;
-
-    private final String beanName;
-
-    private final Class<? extends Annotation> scopeType;
-
-    private final Set<Class<? extends Annotation>> stereotypeTypes;
-
-    private final boolean alternative;
-
-    public AbstractBean(A annotatedElement, Class<?> type) {
-        requireNonNull(annotatedElement, "The 'annotatedSource' argument must not be null!");
-        validateAnnotatedElement(annotatedElement);
-        requireNonNull(type, "The 'type' argument must not be null!");
-        this.annotatedElement = annotatedElement;
-        this.type = type;
-        this.beanTypes = getBeanTypes(getBeanClass());
-        this.qualifiers = Qualifiers.getQualifiers(annotatedElement);
-        this.beanName = getBeanName(annotatedElement);
-        this.scopeType = getScopeType(annotatedElement);
-        this.stereotypeTypes = getStereotypeTypes(annotatedElement);
-        this.alternative = existsAnnotated(annotatedElement, Alternative.class);
-    }
-
-    protected abstract void validateAnnotatedElement(A annotatedElement);
-
-    @Override
-    public Class<?> getBeanClass() {
-        return type;
+    public AbstractBean(A annotatedElement, Class<?> beanClass) {
+        super(annotatedElement, beanClass);
     }
 
     /**
@@ -90,45 +45,8 @@ public abstract class AbstractBean<A extends AnnotatedElement, T> implements Bea
      */
     @Override
     @Deprecated
-    public boolean isNullable() {
+    public final boolean isNullable() {
         return false;
     }
-
-    @Override
-    public Set<Type> getTypes() {
-        return beanTypes;
-    }
-
-    @Override
-    public Set<Annotation> getQualifiers() {
-        return qualifiers;
-    }
-
-    @Override
-    public Class<? extends Annotation> getScope() {
-        return scopeType;
-    }
-
-    @Override
-    public String getName() {
-        return beanName;
-    }
-
-    @Override
-    public Set<Class<? extends Annotation>> getStereotypes() {
-        return stereotypeTypes;
-    }
-
-    @Override
-    public boolean isAlternative() {
-        return alternative;
-    }
-
-    public A getAnnotatedElement() {
-        return annotatedElement;
-    }
-
-    // Abstract methods
-    protected abstract String getBeanName(A annotatedElement);
 
 }

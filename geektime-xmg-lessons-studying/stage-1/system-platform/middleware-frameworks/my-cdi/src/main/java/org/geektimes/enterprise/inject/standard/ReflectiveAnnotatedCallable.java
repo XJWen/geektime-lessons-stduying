@@ -17,7 +17,6 @@
 package org.geektimes.enterprise.inject.standard;
 
 import javax.enterprise.inject.spi.AnnotatedCallable;
-import javax.enterprise.inject.spi.AnnotatedMember;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 import java.lang.reflect.*;
@@ -28,13 +27,15 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * The abstract implementation of {@link AnnotatedCallable} based on Java reflection {@link Executable}
+ * The implementation of {@link AnnotatedCallable} based on Java reflection {@link Executable}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public abstract class ReflectiveAnnotatedCallable<E extends Executable, X> extends
+public class ReflectiveAnnotatedCallable<E extends Executable, X> extends
         ReflectiveAnnotatedMember<E, E, X> implements AnnotatedCallable<X> {
+
+    private List<AnnotatedParameter<X>> annotatedParameters;
 
     public ReflectiveAnnotatedCallable(E executable) {
         super(executable, executable);
@@ -46,6 +47,11 @@ public abstract class ReflectiveAnnotatedCallable<E extends Executable, X> exten
 
     @Override
     public final List<AnnotatedParameter<X>> getParameters() {
+
+        if (annotatedParameters != null) {
+            return annotatedParameters;
+        }
+
         Executable executable = getAnnotatedElement();
         int size = executable.getParameterCount();
 
@@ -61,6 +67,21 @@ public abstract class ReflectiveAnnotatedCallable<E extends Executable, X> exten
             annotatedParameters.add(new ReflectiveAnnotatedParameter<>(parameter, i, this));
         }
 
-        return unmodifiableList(annotatedParameters);
+        annotatedParameters = unmodifiableList(annotatedParameters);
+
+        this.annotatedParameters = annotatedParameters;
+
+        return annotatedParameters;
+    }
+
+    @Override
+    public Type getBaseType() {
+        E executable = getAnnotatedElement();
+        if (executable instanceof Constructor) {
+            return executable.getDeclaringClass();
+        } else if (executable instanceof Method) {
+            return ((Method) executable).getReturnType();
+        }
+        throw new UnsupportedOperationException();
     }
 }

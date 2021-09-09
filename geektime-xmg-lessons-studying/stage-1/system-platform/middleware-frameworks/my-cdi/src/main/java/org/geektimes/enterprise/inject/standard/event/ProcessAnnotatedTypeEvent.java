@@ -16,32 +16,38 @@
  */
 package org.geektimes.enterprise.inject.standard.event;
 
+import org.geektimes.enterprise.inject.standard.beans.StandardBeanManager;
+
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
-import java.util.EventObject;
 
 /**
- * {@link ProcessAnnotatedType} Event Object
+ * {@link ProcessAnnotatedType} Event Object for every Java class, interface (excluding annotation type, a special kind
+ * of interface type) or enum discovered as defined in Type discovery.
  *
+ * @param <X> The class being annotated
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public class ProcessAnnotatedTypeEvent extends EventObject implements ProcessAnnotatedType {
+public class ProcessAnnotatedTypeEvent<X> implements ProcessAnnotatedType<X> {
 
-    private AnnotatedType annotatedType;
+    private final StandardBeanManager standardBeanManager;
 
-    public ProcessAnnotatedTypeEvent(AnnotatedType annotatedType) {
-        super(annotatedType);
+    private AnnotatedType<X> annotatedType;
+
+    public ProcessAnnotatedTypeEvent(AnnotatedType<X> annotatedType, StandardBeanManager standardBeanManager) {
+        this.annotatedType = annotatedType;
+        this.standardBeanManager = standardBeanManager;
     }
 
     @Override
-    public AnnotatedType getAnnotatedType() {
+    public AnnotatedType<X> getAnnotatedType() {
         return annotatedType;
     }
 
     @Override
-    public void setAnnotatedType(AnnotatedType type) {
+    public void setAnnotatedType(AnnotatedType<X> type) {
         this.annotatedType = type;
     }
 
@@ -52,6 +58,13 @@ public class ProcessAnnotatedTypeEvent extends EventObject implements ProcessAnn
 
     @Override
     public void veto() {
+        standardBeanManager.removeType(getAnnotatedType());
+    }
 
+    @Override
+    public String toString() {
+        return "ProcessAnnotatedTypeEvent{" +
+                " annotatedType=" + getAnnotatedType() +
+                '}';
     }
 }

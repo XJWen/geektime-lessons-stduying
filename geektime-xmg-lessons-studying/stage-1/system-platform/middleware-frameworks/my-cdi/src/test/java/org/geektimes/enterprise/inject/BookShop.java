@@ -16,9 +16,51 @@
  */
 package org.geektimes.enterprise.inject;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.ProcessObserverMethod;
+import javax.inject.Inject;
+
 /**
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since
  */
+@Dependent
 public class BookShop extends Business implements Shop<Book> {
+
+    @Inject
+    private BeanManager beanManager;
+
+    @Produces
+    private Book myBook = new Book();
+
+    @PostConstruct
+    public void init() {
+
+    }
+
+    @PreDestroy
+    public void destroy() {
+    }
+
+    @Inject
+    public void init(Shop<Book> bookShop) {
+    }
+
+    @Produces
+    public Book book() {
+        return new Book();
+    }
+
+    public void dispose(@Disposes Book book) {
+    }
+
+    public void onEvent(@Observes ProcessObserverMethod event) {
+        System.out.println(event);
+    }
 }

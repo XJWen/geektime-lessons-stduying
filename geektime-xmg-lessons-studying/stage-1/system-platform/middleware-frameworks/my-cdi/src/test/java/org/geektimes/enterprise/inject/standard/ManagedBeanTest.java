@@ -18,18 +18,18 @@ package org.geektimes.enterprise.inject.standard;
 
 import org.geektimes.enterprise.inject.BookShop;
 import org.geektimes.enterprise.inject.Business;
+import org.geektimes.enterprise.inject.standard.beans.StandardBeanManager;
 import org.junit.Test;
 
-import javax.enterprise.context.NormalScope;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
 import static java.util.Collections.emptySet;
-import static org.geektimes.commons.util.CollectionUtils.ofSet;
+import static org.geektimes.commons.collection.util.CollectionUtils.asSet;
 import static org.junit.Assert.*;
 
 /**
@@ -42,15 +42,15 @@ public class ManagedBeanTest {
 
     @Test
     public void test() {
-        ManagedBean bean = new ManagedBean(BookShop.class);
+        ManagedBean bean = new ManagedBean(BookShop.class, new StandardBeanManager());
         assertEquals(BookShop.class, bean.getBeanClass());
         assertFalse(bean.isNullable());
         assertEquals(4, bean.getTypes().size());
         assertTrue(bean.getTypes().contains(BookShop.class));
         assertTrue(bean.getTypes().contains(Business.class));
         assertTrue(bean.getTypes().contains(Object.class));
-        assertEquals(ofSet(Any.Literal.INSTANCE, Default.Literal.INSTANCE), bean.getQualifiers());
-        assertEquals(NormalScope.class, bean.getScope());
+        assertEquals(asSet(Any.Literal.INSTANCE, Default.Literal.INSTANCE), bean.getQualifiers());
+        assertEquals(Dependent.class, bean.getScope());
         assertEquals("bookShop", bean.getName());
         assertEquals(emptySet(), bean.getStereotypes());
         assertFalse(bean.isAlternative());

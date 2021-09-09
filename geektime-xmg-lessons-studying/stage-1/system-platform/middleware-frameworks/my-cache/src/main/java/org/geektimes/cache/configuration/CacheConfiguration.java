@@ -16,11 +16,9 @@
  */
 package org.geektimes.cache.configuration;
 
-import org.geektimes.cache.AbstractCacheManager;
 import org.geektimes.commons.convert.multiple.MultiValueConverter;
 
 import javax.cache.Cache;
-import javax.cache.CacheManager;
 import javax.cache.configuration.CacheEntryListenerConfiguration;
 import javax.cache.configuration.CompleteConfiguration;
 import javax.cache.configuration.Configuration;
@@ -28,12 +26,10 @@ import javax.cache.configuration.Factory;
 import javax.cache.expiry.ExpiryPolicy;
 import javax.cache.integration.CacheLoader;
 import javax.cache.integration.CacheWriter;
-import javax.cache.spi.CachingProvider;
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.String.format;
+import static java.util.Collections.emptyList;
 import static org.geektimes.commons.convert.Converter.convertIfPossible;
 
 /**
@@ -189,9 +185,10 @@ public interface CacheConfiguration extends CompleteConfiguration {
     default Iterable<CacheEntryListenerConfiguration> getCacheEntryListenerConfigurations() {
         String propertyValue = getProperty(ENTRY_LISTENER_CONFIGURATIONS_PROPERTY_NAME);
         List<Class> configurationClasses = MultiValueConverter.convertIfPossible(propertyValue, List.class, Class.class);
-        return (List<CacheEntryListenerConfiguration>) configurationClasses.stream()
-                .map(this::unwrap)
-                .collect(Collectors.toList());
+        return configurationClasses == null ? emptyList() :
+                (List<CacheEntryListenerConfiguration>) configurationClasses.stream()
+                        .map(this::unwrap)
+                        .collect(Collectors.toList());
     }
 
     @Override

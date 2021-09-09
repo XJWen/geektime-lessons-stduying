@@ -16,14 +16,14 @@
  */
 package org.geektimes.commons.util;
 
-import org.geektimes.commons.function.Streams;
-
+import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
-import static java.util.ServiceLoader.load;
 import static org.geektimes.commons.function.Streams.stream;
-import static org.geektimes.commons.reflect.util.ClassUtils.getClassLoader;
+import static org.geektimes.commons.lang.util.ArrayUtils.asArray;
+import static org.geektimes.commons.lang.util.ClassLoaderUtils.getClassLoader;
 
 /**
  * {@link ServiceLoader} Utilities Class
@@ -32,6 +32,8 @@ import static org.geektimes.commons.reflect.util.ClassUtils.getClassLoader;
  * @since 1.0.0
  */
 public abstract class ServiceLoaders {
+
+    private static final Map<ClassLoader, Map<Class<?>, ServiceLoader<?>>> serviceLoadersCache = new ConcurrentHashMap<>();
 
     public static <T> Stream<T> loadAsStream(Class<T> serviceClass) {
         return loadAsStream(serviceClass, getClassLoader(serviceClass));
@@ -42,7 +44,11 @@ public abstract class ServiceLoaders {
     }
 
     public static <T> T loadSpi(Class<T> serviceClass) {
-        return load(serviceClass, getClassLoader(serviceClass)).iterator().next();
+        return loadSpi(serviceClass, getClassLoader(serviceClass));
+    }
+
+    public static <T> T loadSpi(Class<T> serviceClass, ClassLoader classLoader) {
+        return load(serviceClass, classLoader).iterator().next();
     }
 
     public static <T> T[] loadAsArray(Class<T> serviceClass) {
@@ -50,6 +56,17 @@ public abstract class ServiceLoaders {
     }
 
     public static <T> T[] loadAsArray(Class<T> serviceClass, ClassLoader classLoader) {
-        return (T[]) loadAsStream(serviceClass, classLoader).toArray();
+        return asArray(load(serviceClass, classLoader), serviceClass);
+    }
+
+    public static <T> ServiceLoader<T> load(Class<T> serviceClass) {
+        return load(serviceClass, getClassLoader(serviceClass));
+    }
+
+    public static <T> ServiceLoader<T> load(Class<T> serviceClass, ClassLoader classLoader) {
+        Map<Class<?>, ServiceLoader<?>> serviceLoadersMap = serviceLoadersCache.computeIfAbsent(classLoader, cl -> new ConcurrentHashMap<>());
+        ServiceLoader<T> serviceLoader = (ServiceLoader<T>) serviceLoadersMap.computeIfAbsent(serviceClass,
+                service -> ServiceLoader.load(service, classLoader));
+        return serviceLoader;
     }
 }

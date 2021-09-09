@@ -30,7 +30,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static java.lang.Boolean.TRUE;
 import static org.geektimes.cache.annotation.util.CacheAnnotationUtils.findCacheDefaults;
 import static org.geektimes.commons.reflect.util.ClassUtils.isDerived;
 
@@ -51,7 +50,16 @@ public abstract class CacheOperationInterceptor<A extends Annotation> extends An
 
     private final ConcurrentMap<A, CacheKeyGenerator> cacheKeyGeneratorCache = new ConcurrentHashMap<>();
 
-    protected Object execute(InvocationContext context, A cacheOperationAnnotation) throws Throwable {
+    public CacheOperationInterceptor() {
+
+    }
+
+    @Override
+    protected boolean shouldRegisterSyntheticInterceptorBindingType() {
+        return true;
+    }
+
+    protected Object intercept(InvocationContext context, A cacheOperationAnnotation) throws Throwable {
         Object target = context.getTarget();
         Method method = context.getMethod();
         Object[] parameters = context.getParameters();
